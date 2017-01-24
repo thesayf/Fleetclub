@@ -468,8 +468,24 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 var year = realTime.getUTCFullYear().toString().substr(2,2);
                 var nowDate = day+'-'+month+'-'+year;
                 var nowTime = h+':'+m;
-                if(nowTime > $scope.dashInstant.jobStartTime && !($scope.dashInstant.jobDate > nowDate) ) {
-                    $.growl.error({ message: 'The Start Time has already passed!' });
+
+                var utcNowDate = month+'-'+day+'-'+year;
+
+                var splitChooseDate = $scope.dashInstant.jobDate.split();
+                var utcJobDate = splitChooseDate[1]+'-'+splitChooseDate[0]+'-'+splitChooseDate[2];
+
+
+                if(nowTime > $scope.dashInstant.jobStartTime && day == splitChooseDate[0]) {
+                    console.log(day);
+                    console.log(splitChooseDate[0]);
+                    var d1 = Date.parse(utcNowDate);
+                    var d2 = Date.parse(utcJobDate);
+                    if (d1 < d2) {
+                        $.growl.error({ message: 'The Start Time has already passed!' });
+                    } else {
+                        // Cool
+                    }
+
                 }
             }
 
@@ -575,7 +591,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.updateMaps = function() {
-        if($scope.dashInstant || $scope.dashInstant.address) {
+        if($scope.dashInstant && $scope.dashInstant.address) {
             if($scope.dashInstant.address.start_location !== undefined) {
                 if($scope.dashInstant.address.start_location.name.formatted_address) {
                     $scope.dashInstant.address.start_location.lat =
