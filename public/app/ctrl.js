@@ -280,7 +280,11 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             canProgress = canProgress + 1;
         }
 
-        $scope.totalQty = ($scope.dashInstant.itemBoxes[0].qty + $scope.dashInstant.itemBoxes[1].qty) + $scope.dashInstant.itemBoxes[2].qty;
+        $scope.totalQty = (
+            parseInt($scope.dashInstant.itemBoxes[0].qty) +
+            parseInt($scope.dashInstant.itemBoxes[1].qty) +
+            parseInt($scope.dashInstant.itemBoxes[2].qty) );
+
         console.log($scope.totalQty);
 
 
@@ -389,10 +393,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     $scope.changeInventory = function(type, num) {
         var currNum = $scope.dashInstant.itemBoxes[num].qty;
         if(type == 'plus') {
-            $scope.dashInstant.itemBoxes[num].qty = currNum + 1;
+            $scope.dashInstant.itemBoxes[num].qty = parseInt(currNum + 1);
         } else {
             if(currNum > 0) {
-                $scope.dashInstant.itemBoxes[num].qty = currNum - 1;
+                $scope.dashInstant.itemBoxes[num].qty = parseInt(currNum - 1);
             }
 
         }
@@ -483,7 +487,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 $('.review-body').addClass('hide');
                 swift.driverList(function(resp) {
                     //$localStorage.vg.drivers = resp;
-                    $scope.dashInstant.driverCount = Math.ceil(resp.length / 4);
+                    $scope.dashInstant.driverCount = resp.length;
                     $timeout(function() {
                         $('.review-body').removeClass('hide');
                         $('.modal-body').removeClass('tc');
@@ -500,7 +504,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         $scope.totalCuft = 0;
         for(ti in $scope.dashInstant.itemBoxes) {
             var itemType = $scope.dashInstant.itemBoxes[ti].size;
-            var itemQty = $scope.dashInstant.itemBoxes[ti].qty;
+            var itemQty = parseInt($scope.dashInstant.itemBoxes[ti].qty);
             var itemCuft = items[''+itemType+'']['cuFt'];
             $scope.loadTime = $scope.loadTime + (items[''+itemType+'']['loadTime'] * itemQty);
             $scope.unloadTime = $scope.unloadTime + (items[''+itemType+'']['unloadTime'] * itemQty);
@@ -571,42 +575,44 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.updateMaps = function() {
-        if($scope.dashInstant.address.start_location !== undefined) {
-            if($scope.dashInstant.address.start_location.name.formatted_address) {
-                $scope.dashInstant.address.start_location.lat =
-                $scope.dashInstant.address.start_location.name.geometry.location.lat();
-                $scope.dashInstant.address.start_location.lng =
-                $scope.dashInstant.address.start_location.name.geometry.location.lng();
-                $scope.dashInstant.address.start_location.name = $scope.dashInstant.address.start_location.name.formatted_address;
+        if($scope.dashInstant || $scope.dashInstant.address) {
+            if($scope.dashInstant.address.start_location !== undefined) {
+                if($scope.dashInstant.address.start_location.name.formatted_address) {
+                    $scope.dashInstant.address.start_location.lat =
+                    $scope.dashInstant.address.start_location.name.geometry.location.lat();
+                    $scope.dashInstant.address.start_location.lng =
+                    $scope.dashInstant.address.start_location.name.geometry.location.lng();
+                    $scope.dashInstant.address.start_location.name = $scope.dashInstant.address.start_location.name.formatted_address;
+                }
             }
-        }
-        if($scope.dashInstant.address.end_location !== undefined) {
-            if($scope.dashInstant.address.end_location.name.formatted_address) {
-                $scope.dashInstant.address.end_location.lat =
-                $scope.dashInstant.address.end_location.name.geometry.location.lat();
-                $scope.dashInstant.address.end_location.lng =
-                $scope.dashInstant.address.end_location.name.geometry.location.lng();
-                $scope.dashInstant.address.end_location.name = $scope.dashInstant.address.end_location.name.formatted_address;
+            if($scope.dashInstant.address.end_location !== undefined) {
+                if($scope.dashInstant.address.end_location.name.formatted_address) {
+                    $scope.dashInstant.address.end_location.lat =
+                    $scope.dashInstant.address.end_location.name.geometry.location.lat();
+                    $scope.dashInstant.address.end_location.lng =
+                    $scope.dashInstant.address.end_location.name.geometry.location.lng();
+                    $scope.dashInstant.address.end_location.name = $scope.dashInstant.address.end_location.name.formatted_address;
+                }
             }
-        }
-        if($scope.dashInstant.address.pickup1 !== undefined && $scope.dashInstant.address.pickup1.formatted_address) {
-            $scope.dashInstant.address.pickup1.name = $scope.dashInstant.address.pickup1.formatted_address;
-        }
-        if($scope.dashInstant.address.dropoff1 !== undefined && $scope.dashInstant.address.dropoff1.formatted_address) {
-            $scope.dashInstant.address.dropoff1.name = $scope.dashInstant.address.dropoff1.formatted_address;
-        }
+            if($scope.dashInstant.address.pickup1 !== undefined && $scope.dashInstant.address.pickup1.formatted_address) {
+                $scope.dashInstant.address.pickup1.name = $scope.dashInstant.address.pickup1.formatted_address;
+            }
+            if($scope.dashInstant.address.dropoff1 !== undefined && $scope.dashInstant.address.dropoff1.formatted_address) {
+                $scope.dashInstant.address.dropoff1.name = $scope.dashInstant.address.dropoff1.formatted_address;
+            }
 
-        if($scope.dashInstant.address.start_location !== undefined &&
-            $scope.dashInstant.address.start_location.name !== '' &&
-            $scope.dashInstant.address.end_location !== undefined &&
-            $scope.dashInstant.address.end_location.name !== '') {
-                maps.setDirections($scope.dashInstant.address, function(data) {
-                    var tempMiles = 0.000621371192237 * data.distance;
-                    $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
-                    $scope.dashInstant.distance = tempMiles;
-                    $scope.dashInstant.duration = data.duration;
-                });
-         }
+            if($scope.dashInstant.address.start_location !== undefined &&
+                $scope.dashInstant.address.start_location.name !== '' &&
+                $scope.dashInstant.address.end_location !== undefined &&
+                $scope.dashInstant.address.end_location.name !== '') {
+                    maps.setDirections($scope.dashInstant.address, function(data) {
+                        var tempMiles = 0.000621371192237 * data.distance;
+                        $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
+                        $scope.dashInstant.distance = tempMiles;
+                        $scope.dashInstant.duration = data.duration;
+                    });
+             }
+        }
     }
 
     $scope.extraHelpClick = function() {
@@ -623,7 +629,11 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         },1000)
     }
 
-    $scope.changeData();
+    //$scope.changeData();
+
+    $timeout(function() {
+        $scope.updateMaps();
+    }, 500)
 
     $scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
         $scope.changeData();
@@ -766,6 +776,10 @@ app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, in
         }
     }
 
+    $scope.openCalendar = function() {
+        $('#job-date-picker').focus();
+    }
+
     /*$scope.$watch('misc.myBookingsReady', function(newValue, oldValue) {
         if(newValue == true) {
             $scope.displayBooking = bookingGrab.displayAllRecords(null, "Quote", function(resp){
@@ -898,7 +912,6 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
             cb(0);
         }
 
-
     }
 
 
@@ -955,7 +968,6 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
       $form.submit(function(event) {
           event.preventDefault();
 
-
           var flag = 0;
           if($scope.ccDeets.number == undefined || $scope.ccDeets.number.replace(/ /g,'').length !== 16) {
               $.growl.error({ message: 'Card Number Must Be 16 Digits!'});
@@ -979,23 +991,27 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
           }
 
           if(flag > 0) {
-            return false;
+              return false;
           } else {
             // Disable the submit button to prevent repeated clicks:
             $form.find('.submit').prop('disabled', true);
+            $('.subscribe').after('<img class="spinner" style="width:20px; margin-top:-70px; margin-left:320px; opacity:1;" src="/assets/img/35.gif">');
 
             // Request a token from Stripe:
             Stripe.card.createToken($form, function(status, res) {
                 $localStorage.vg.jobDetails
                 $http.post("/api/charge-card", {stripe: res, user: $localStorage.vg.jobDetails}).then(function(status){
                     if(status.data.status !== false) {
-                        $.growl.notice({message: status.data.message});
+                        //$.growl.notice({message: status.data.message});
                         $scope.jobDeets.paymentID = status.data.data.id;
                         $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
                         $http.post('/api/book-job', {data: $localStorage.vg.jobDetails}).then(function(resp) {
                             if(resp.data.status == true) {
                                 autho.bc = true;
                                 $location.path("/booking-complete");
+                                autho.checkout3 = false;
+                                autho.checkout2 = false;
+                                autho.checkout1 = false;
                                 $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
                                     $localStorage.vg = {};
                                     $scope.dashInstant = {};
@@ -1007,10 +1023,14 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
                                 });
                             } else {
                                 $.growl.error({message: 'Job Booking Failed Please Call Us!'});
+                                $form.find('.submit').prop('disabled', false);
+                                $('.spinner').remove();
                             }
                         })
                     } else {
                         $.growl.error({message: 'Payment Failed, Try a different card!'});
+                        $form.find('.submit').prop('disabled', false);
+                        $('.spinner').remove();
                     }
                 });
             });
