@@ -10,26 +10,34 @@
             <div class="modal-body">
                 <div id="modal-cont" class="row">
 
-                    <div id="review-body" class="row pricing-tables review-body">
-            <div class="col-md-12">
-              <div class="pricing-table pricing-table-primary">
-                  <div class="pricing-table-title text-center">Your Quote</div>
-                  <div class="panel-divider panel-divider-xl"></div>
-                  <div class="col-md-12">
-                <div class="pricing-table-price"><span class="currency">£</span><span class="value">{{dashInstant.estiCalc}}</span><span class="frecuency">/Total</span></div>
-                      <div class="pricing-table-description">For a <strong>{{dashInstant.van}} </strong> | <a href="javascript:;" data-toggle="popover" data-trigger="hover" title="Van Details" data-content="{{dashInstant.vanDeets}}" data-placement="top">View Van Details</a></div>
+                    <div ng-if="totalCuft < 600" id="review-body" class="row pricing-tables review-body">
+                        <div class="col-md-12">
+                            <div class="pricing-table pricing-table-primary">
+                              <div class="pricing-table-title text-center">Your Quote</div>
+                              <div class="panel-divider panel-divider-xl"></div>
+                              <div class="col-md-12">
+                                  <div class="pricing-table-price"><span class="currency">£</span><span class="value">{{dashInstant.estiCalc}}</span><span class="frecuency">/Total</span></div>
+                                  <div class="pricing-table-description">For a <strong>{{dashInstant.van}} </strong> | <a href="javascript:;" data-toggle="popover" data-trigger="hover" title="Van Details" data-content="{{dashInstant.vanDeets}}" data-placement="top">View Van Details</a></div>
+                                  <div class="pricing-table-description"><strong>{{dashInstant.driverCount}}</strong> Drivers available for this delivery</div>
+                                  <div class="pricing-table-description col-md-120"> Deposit to pay today       <strong>£{{dashInstant.deposit}}</strong>.
+                                  </div>
+                                  <div class="pricing-table-description col-md-120"> Deposit to pay on delivery <strong>£{{dashInstant.toPay}}</strong>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
 
-
-
-                      <div class="pricing-table-description"><strong>{{dashInstant.driverCount}}</strong> Drivers avaiable for this delivery</div>
-                      <div class="pricing-table-description col-md-120"> Deposit to pay today <strong>£{{dashInstant.deposit}}</strong>.
-                </div>
-                  <div class="pricing-table-description col-md-120"> Deposit to pay on delivery <strong>£{{dashInstant.toPay}}</strong>
-                </div>
-                  </div>
-              </div>
-            </div>
-
+                    <div ng-if="totalCuft >= 600" id="review-body" class="row pricing-tables review-body">
+                        <div class="col-md-12">
+                            <div class="pricing-table pricing-table-primary">
+                              <div class="pricing-table-title text-center">Warning</div>
+                              <div class="panel-divider panel-divider-xl"></div>
+                              <div class="col-md-12">
+                                  <p>Your delivery is too high over 600 cubic feet to order contact our office.</p>
+                              </div>
+                          </div>
+                      </div>
                     </div>
 <!--
                   <div id="review-body" class="text-center review-body">
@@ -46,7 +54,7 @@
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
 
-                <a ng-click="goToCheck()">
+                <a ng-if="totalCuft < 600" ng-click="goToCheck()">
                     <button data-dismiss="modal" class="btn btn-danger btn-space btn-hspace">Check Out</button>
                 </a>
             </div>

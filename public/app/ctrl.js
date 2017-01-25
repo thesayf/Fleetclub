@@ -496,7 +496,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
             }*/
             if($scope.totalCuft >= 600) {
-                alert('Please call us for moves with 600 cubic feet or over!');
+                //alert('Please call us for moves with 600 cubic feet or over!');
             } else {
                 $('.modal-body').prepend('<img class="spin-img" src="/assets/img/35.gif">');
                 $('.modal-body').addClass('tc');
