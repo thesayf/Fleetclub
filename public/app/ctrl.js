@@ -119,7 +119,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
         function logout() {
             $localStorage.vg = {};
-            $location.path('/');
+
+            window.location.replace("/");
         }
 
         function resetTimer() {
@@ -398,8 +399,16 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             if(currNum > 0) {
                 $scope.dashInstant.itemBoxes[num].qty = parseInt(currNum - 1);
             }
-
         }
+        if($scope.totalCuft >= 600) {
+            $.growl.error({message: 'Please call us for moves with 600 cubic feet or over!'})
+        }
+    }
+
+    $scope.clickSlot = function(e) {
+        var input = $(e.currentTarget).find('input');
+        $(input)[0].checked = true;
+        $scope.dashInstant.jobStartTime = $(input).val();
     }
 
     $scope.holdDriverDelay = function(e) {
@@ -497,6 +506,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             }*/
             if($scope.totalCuft >= 600) {
                 //alert('Please call us for moves with 600 cubic feet or over!');
+
             } else {
                 $('.modal-body').prepend('<img class="spin-img" src="/assets/img/35.gif">');
                 $('.modal-body').addClass('tc');
