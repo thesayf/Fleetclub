@@ -16,16 +16,28 @@ swift.bookJob = function(rest, data, cb) {
 
     //console.log(data);
     //pickupTime: "2016-11-30T15:51:34.9962121+00:00"
+    if(data.extraHelp == false) {
+        data.extraHelp = '1 Man';
+    } else {
+        data.extraHelp = '2 Man';
+    }
 
     if(data.instructions == undefined) {
         data.instructions = '';
     }
 
+    var dateSplit = data.jobDate.split('-');
+    var year = dateSplit[2];
+    var month = dateSplit[1];
+    var day = dateSplit[0];
+
+    // ref: day, date, timeslot, price-deposit, porter
+
     var swiftObj = {
       "apiKey": swiftKey,
       "booking": {
-        "reference": data.jobStartTime+ - +data.estiCalc - data.deposit+' - '+'Sm:'+data.itemBoxes[0].qty+', Md:'+data.itemBoxes[1].qty+', Lg:'+data.itemBoxes[2].qty,
-        "deliveryInstructions": data.instructions+' - Need Porter: '+data.extraHelp+' cubic feet: '+data.jobMinCub+' - '+data.jobMaxCub+' cuFt',
+        "reference": data.jobDate+',('+data.jobStartTime+'),£'+(parseInt(data.estiCalc) - parseInt(data.deposit))+','+data.extraHelp,
+        "deliveryInstructions": data.instructions+' - '+ 'Sm:'+data.itemBoxes[0].qty+', Md:'+data.itemBoxes[1].qty+', Lg:'+data.itemBoxes[2].qty+' cubic feet: '+data.jobMinCub+' - '+data.jobMaxCub+' cuFt',
         "itemsRequirePurchase": false,
         "items": [
           {
@@ -41,7 +53,7 @@ swift.bookJob = function(rest, data, cb) {
             "description": 'Large Items'
           }
         ],
-        "pickupTime": '20'+data.jobDate+'T'+data.jobStartTime.split('-')[0],
+        "pickupTime": '20'+year+'-'+month+'-'+day+'T'+data.jobStartTime.split('-')[0],
         "pickupDetail": {
           "name": data.name,
           "phone": data.number,

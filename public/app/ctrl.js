@@ -409,6 +409,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var input = $(e.currentTarget).find('input');
         $(input)[0].checked = true;
         $scope.dashInstant.jobStartTime = $(input).val();
+        console.log($scope.dashInstant.jobStartTime);
+        $scope.changeData();
     }
 
     $scope.holdDriverDelay = function(e) {
@@ -592,9 +594,12 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         $scope.dashInstant.toPay = Math.ceil($scope.dashInstant.toPay);
 
         //console.log(new Date($scope.dashInstant.jobDate).toISOString());
-        var ar = $scope.dashInstant.jobDate.split("-");
-        var d = ar[1]+"/"+ar[0]+"/"+ar[2];
-        $scope.dashInstant.jobTimestamp = new Date(d).getTime();
+        if($scope.dashInstant.jobDate) {
+            var ar = $scope.dashInstant.jobDate.split("-");
+            var d = ar[1]+"/"+ar[0]+"/"+ar[2];
+            $scope.dashInstant.jobTimestamp = new Date(d).getTime();
+        }
+
         $scope.dashInstant.van = van;
 
 

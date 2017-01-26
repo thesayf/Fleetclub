@@ -107,12 +107,12 @@ func.param = function(data) {
 
 func.sendEmail = function(data, utils, cb) {
     // create reusable transporter object using the default SMTP transport
-    var transporter = utils.nodemailer.createTransport('smtps://yasin3683%40gmail.com:Allah001@smtp.gmail.com');
+    var transporter = utils.nodemailer.createTransport('smtps://hello@thevanclub.io:hakeem44@smtp.gmail.com');
 
     // setup e-mail data with unicode symbols
     var mailOptions = {
-        from: '"Hello" <hello@vangrab.com>', // sender address
-        to: 'yasinadam@outlook.com', // list of receivers
+        from: '"Hello" <hello@thevanclub.io>', // sender address
+        to: data.email, // list of receivers
         subject: data.subject, // Subject line
         text: data.msg // plaintext body
         //html: '<b>Hello world ?</b>' // html body

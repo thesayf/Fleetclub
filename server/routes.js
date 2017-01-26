@@ -27,6 +27,7 @@ module.exports = function(app, models, utils, cont, info) {
 		cont.swift.bookJob(utils.rest, req.body.data, function(resp) {
 			//currentStatus
 			var obj = JSON.parse(resp.rawEncoded);
+			console.log(obj);
 			var stat = obj['delivery']['currentStatus'];
 			if(stat == 'Received') {
 				cont.func.sendInfo(res, true, {message: 'Booking Successful!'});
