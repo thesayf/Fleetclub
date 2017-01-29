@@ -565,6 +565,20 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var fuelCost = $scope.dashInstant.distance * 1;
 
         var totalTime = $scope.loadTime + $scope.unloadTime + driveTime;
+        if(totalTime < 90) {
+          totalTime = 90;
+        }
+        if($scope.dashInstant.extraHelp == true) {
+            if(van == 'Small Van') {
+                rate = .50;
+            }
+            if(van == 'Medium Van') {
+                rate = .67;
+            }
+            if(van == 'Luton Van') {
+                rate = .92;
+            }
+        }
         var workCost = totalTime * rate;
 
         if($scope.dashInstant.extraHelp == true) {
@@ -573,7 +587,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             var extra = 0;
         }
 
-        if(van == 'Small Van' && (workCost+extra) < 15) {
+        /*if(van == 'Small Van' && (workCost+extra) < 15) {
             workCost = 15;
         }
         if(van == 'Medium Van' && (workCost+extra) < 20) {
@@ -581,9 +595,14 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         }
         if(van == 'Luton Van' && (workCost+extra) < 35) {
             workCost = 35;
-        }
+        }*/
+
+
+
+
 
         $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
+
 
 
 

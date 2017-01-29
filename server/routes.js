@@ -1,3 +1,6 @@
+var sgHelper = require('sendgrid').mail;
+var sg = require('sendgrid')('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');
+
 module.exports = function(app, models, utils, cont, info) {
 
 	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
@@ -28,9 +31,17 @@ module.exports = function(app, models, utils, cont, info) {
 			//currentStatus
 			var obj = JSON.parse(resp.rawEncoded);
 			console.log(obj);
-			var stat = obj['delivery']['currentStatus'];
-			if(stat == 'Received') {
-				cont.func.sendInfo(res, true, {message: 'Booking Successful!'});
+			if(obj['delivery']) {
+					if(obj['delivery']['currentStatus']) {
+							var stat = obj['delivery']['currentStatus'];
+							if(stat == 'Received') {
+								cont.func.sendInfo(res, true, {message: 'Booking Successful!'});
+							} else {
+								cont.func.sendInfo(res, false, {message: 'Booking Failed!'});
+							}
+					} else {
+						cont.func.sendInfo(res, false, {message: 'Booking Failed!'});
+					}
 			} else {
 				cont.func.sendInfo(res, false, {message: 'Booking Failed!'});
 			}
@@ -45,9 +56,66 @@ module.exports = function(app, models, utils, cont, info) {
 
 		req.body.data.msg = req.body.data.msg+'\rMedium Items x '+req.body.data.itemBoxes[1].qty+'\rLarge Items x '+req.body.data.itemBoxes[2].qty+'\r___________________________\rTOTAL PRICE\r'+req.body.data.estiCalc+'\r___________________________\rDEPOSIT PAID\r'+req.body.data.deposit+'\r\rRefund Policy: A refund can be given at any time before a driver has been dispatched';
 
-		req.body.data.subject = 'Vangrab Order Reciept';
+		//var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+		var request = sg.emptyRequest({
+		  method: 'POST',
+		  path: '/v3/mail/send',
+		  body: {
+		    personalizations: [
+		      {
+		        to: [
+		          {
+		            email: req.body.data.email,
+		          },
+		        ],
+		        subject: 'TheVanClub.io Order Reciept',
+		      },
+		    ],
+		    from: {
+		      email: 'hello@thevanclub.io',
+		    },
+		    content: [
+		      {
+		        type: 'text/plain',
+		        value: req.body.data.msg,
+		      },
+		    ],
+		  },
+		});
 
-        cont.func.sendEmail(req.body.data, utils, function(resp) {
+
+	//With callback
+	sg.API(request, function(error, response) {
+	  if (error) {
+	    console.log('Error response received');
+	  }
+	  console.log(response.statusCode);
+	  console.log(response.body);
+	  console.log(response.headers);
+	});
+
+		//req.body.data.subject = 'Vangrab Order Reciept';
+
+		/*var from_email = new utils.sgHelper.Email('hello@thevanclub.io');
+		var to_email = new utils.sgHelper.Email(req.body.data.email);
+		var subject = 'TheVanClub.io Order Reciept';
+		var content = new utils.sgHelper.Content('text/plain', req.body.data.msg);
+		var mailObj = new utils.sgHelper.Mail(from_email, subject, to_email, content);*/
+
+		/*var request = utils.sg.emptyRequest({
+      method: 'POST',
+      path: '/v3/mail/send',
+      body: emailObj.toJSON(),
+    });
+
+    utils.sg.API(request, function(error, response) {
+        console.log(error);
+      console.log(response.statusCode);
+      console.log(response.body);
+      console.log(response.headers);
+    });*/
+
+        /*cont.func.sendEmail(req.body.data, utils, function(resp) {
 			if(resp == false) {
 				// card declined
 				cont.func.sendInfo(res, false, {message: 'Payment Failed!'})
@@ -55,7 +123,7 @@ module.exports = function(app, models, utils, cont, info) {
 				// charge ok
 				cont.func.sendInfo(res, true, {data: resp, message: 'Payment Successful!'})
 			}
-		})
+		})*/
 	});
 
     // This shows the main angular index

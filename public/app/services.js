@@ -191,7 +191,7 @@ app.factory('items', function() {
     items.smItems = {
         loadTime: 1.5,
         unloadTime: 1.5,
-        cuFt: 2
+        cuFt: 2.5
     };
     items.mdItems = {
         loadTime: 4,
@@ -219,14 +219,14 @@ app.factory('rates', function() {
         1: {
             minRange: 301,
             maxRange: 400,
-            rate: .33,
+            rate: .34,
             van: 'Medium Van',
             details: 'Long Wheel Base - 600 ft3, Length: 4m, Width: 2m, Height: 2.2m, Payload: 1200-1500kg'
         },
         2: {
             minRange: 401,
             maxRange: 600,
-            rate: .58,
+            rate: .59,
             van: 'Luton Van',
             details: 'Luton Van - 600 ft3, Length: 4m, Width: 2m, Height: 2.2m, Payload: 1200-1500kg'
         }
