@@ -3,7 +3,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="review-booking-close" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
                 <h3 class="text-center">Review Booking</h3>
             </div>
 
@@ -12,23 +11,16 @@
                 <div id="modal-cont" class="row">
                     <div ng-if="totalCuft < 600" id="review-body" class="row pricing-tables review-body">
                         <div class="col-md-12">
-                            <div class="pricing-table pricing-table-primary">
                               <div class="pricing-table-title text-center">Your Quote</div>
                               <div class="panel-divider panel-divider-xl"></div>
                               <div class="col-md-12">
                                   <div class="pricing-table-price"><span class="currency">£</span><span class="value">{{dashInstant.estiCalc}}</span><span class="frecuency">/Total</span></div>
-                                  <div class="pricing-table-description">For a <strong>{{dashInstant.van}} </strong> | <a href="javascript:;" data-toggle="popover" data-trigger="hover" title="Van Details" data-content="{{dashInstant.vanDeets}}" data-placement="top">View Van Details</a></div>
-                                  <div class="pricing-table-description"><strong>{{dashInstant.driverCount}}</strong> Drivers available for this delivery</div>
-                                  <div class="pricing-table-description col-md-120"> Deposit to pay today       <strong>£{{dashInstant.deposit}}</strong>.
-                                  </div>
-                                  <div class="pricing-table-description col-md-120"> Deposit to pay on delivery <strong>£{{dashInstant.toPay}}</strong>
-                                  </div>
+                                  <div class="pricing-table-description">There are <strong><u>{{dashInstant.driverCount}}</u></strong> Drivers available for this delivery</div>
                               </div>
-                          </div>
                       </div>
                     </div>
 
-                    <div ng-if="totalCuft >= 600" id="review-body" class="row pricing-tables review-body">
+                    <div ng-if="totalCuft >= 600" id="review-body" class="row pricing-tables ">
                         <div class="col-md-12">
                             <div class="pricing-table pricing-table-primary">
                               <div class="pricing-table-title text-center">Ooops!</div>
@@ -50,7 +42,7 @@
                     </div>
 
                   </div>
-              <div class="panel-body modal-price-table">
+              <div class="panel-body modal-price-table review-body">
                  <table class="table table-striped table-fw-widget">
                 <tbody>
 

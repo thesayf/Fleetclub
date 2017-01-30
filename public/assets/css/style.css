@@ -3379,8 +3379,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary {
   border-color: #ec4b4b;
   color: #ffffff;
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-primary:focus,
 .btn-primary.focus {
@@ -3446,20 +3446,20 @@ fieldset[disabled] .btn-primary.active {
 .btn-primary:focus,
 .btn-primary.focus {
   color: #ffffff;
-  background-color: #ef6262;
-  border-color: #ef6262;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-primary:hover {
   color: #ffffff;
-  background-color: #f17979;
-  border-color: #f17979;
+  background-color: #8cd3c7;
+  border-color: #8cd3c7;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #ec4b4b;
-  border-color: #ec4b4b;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -3471,8 +3471,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-primary.active.focus,
 .open > .dropdown-toggle.btn-primary.focus {
   color: #ffffff;
-  background-color: #ec4b4b;
-  border-color: #ec4b4b;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3763,8 +3763,8 @@ fieldset[disabled] .btn-info.active {
 .btn-warning {
   border-color: #ffbe57;
   color: #ffffff;
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-warning:focus,
 .btn-warning.focus {
@@ -3891,8 +3891,8 @@ fieldset[disabled] .btn-warning.active {
 .btn-danger {
   border-color: #ed4b4b;
   color: #ffffff;
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:focus,
 .btn-danger.focus {
@@ -3902,8 +3902,8 @@ fieldset[disabled] .btn-warning.active {
 }
 .btn-danger:hover {
   color: #ffffff;
-  background-color: #ea3434;
-  border-color: #e31717;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:active,
 .btn-danger.active,
@@ -3958,20 +3958,20 @@ fieldset[disabled] .btn-danger.active {
 .btn-danger:focus,
 .btn-danger.focus {
   color: #ffffff;
-  background-color: #ef6262;
-  border-color: #ef6262;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:hover {
   color: #ffffff;
-  background-color: #f17979;
-  border-color: #f17979;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:active,
 .btn-danger.active,
 .open > .dropdown-toggle.btn-danger {
   color: #ffffff;
-  background-color: #ed4b4b;
-  border-color: #ed4b4b;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:active:hover,
 .btn-danger.active:hover,
@@ -4009,8 +4009,8 @@ fieldset[disabled] .btn-danger:active,
 .btn-danger.disabled.active,
 .btn-danger[disabled].active,
 fieldset[disabled] .btn-danger.active {
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger .badge {
   color: #ef6262;
@@ -6302,8 +6302,8 @@ button.list-group-item-danger.active:focus {
 }
 .panel-primary > .panel-heading {
   color: #ffffff;
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ef6262;
@@ -6501,8 +6501,8 @@ button.close {
 .modal-content {
   position: relative;
   background-color: #ffffff;
-  border: 1px solid #999999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 0px solid #999999;
+  border: 0px solid rgba(0, 0, 0, 0.2);
   border-radius: 0;
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -7547,7 +7547,7 @@ button:focus {
 	[Top header]
 */
 .am-top-header {
-  background-color: #63bf63;
+  background-color: #01bf86;
   border: 0;
   margin-bottom: 0;
 }
@@ -7586,7 +7586,7 @@ button:focus {
   margin-left: 0;
   margin-right: 10px;
   width: 180px;
-  background-image: url("../img/Moverspro-logo3.png");
+  background-image: url("../img/smallvc.png");
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .am-nosidebar-left .am-top-header .navbar-header .navbar-brand {
@@ -16776,7 +16776,7 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
 .md-modal.colored-header .modal-content .modal-header,
 .modal.colored-header .md-content .modal-header,
 .md-modal.colored-header .md-content .modal-header {
-  background-color: #63bf63;
+  background-color: #01bf86;
   color: #ffffff;
   padding: 20px 15px;
 }
@@ -19600,6 +19600,35 @@ width: 150px;
   margin: 40px auto;
   
 }
+    
+    .inv-no-border{
+        
+        padding-top: 0px !important ;
+        
+    }
+    
 
+    .rev-border{
+        padding-top: 0px !important;
+        
+    }
+    
+    .m-content{
+        
+        padding-top: 0px;
+        padding-top: 0px;
+    }
+    
+    .modal-price-table2{
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+    
+    .review-body{
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 
 }

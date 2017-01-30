@@ -292,7 +292,7 @@ a:hover,a:focus,.a:active {
   border-color: #DDDDDD;
   border-radius: 2px;
   box-shadow: none;
-  padding: 25px;
+  padding: 0px;
 }
 
 .modal .modal-dialog .modal-content .modal-header {
@@ -307,7 +307,7 @@ a:hover,a:focus,.a:active {
 }
 
 .modal .modal-dialog .modal-content .modal-footer {
-  padding: 0;
+  padding: 15px;
   padding-top: 15px;
 }
 
@@ -894,3 +894,33 @@ textarea.form-control {
     text-align: center;
   }
 }
+
+.inv-no-border{
+        
+        padding-top: 0px !important ;
+        
+    }
+.inventory-text{
+    
+    margin-top: 10px;
+}
+
+    .rev-border{
+        padding-top: 0px !important;
+        
+    }
+.modal-price-table2{
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.review-body{
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+
+
