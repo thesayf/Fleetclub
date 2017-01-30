@@ -562,7 +562,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var driveTime = $scope.dashInstant.duration / 60;
         //var milesTravel = $scope.dashInstant.distance * 0.000621371192237;
         //console.log('distance: '+$scope.dashInstant.distance);
-        var fuelCost = $scope.dashInstant.distance * 1;
+        var fuelCost = $scope.dashInstant.distance * 1.5;
 
         var totalTime = $scope.loadTime + $scope.unloadTime + driveTime;
         if(totalTime < 90) {
