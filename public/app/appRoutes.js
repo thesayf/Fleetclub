@@ -11,6 +11,11 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             templateUrl : 'app/components/home/con-web/driver-terms.html',
             controller  : 'HomeCtrl'
         })
+    
+        .when('/con-terms', {
+            templateUrl : 'app/components/home/con-web/con-terms.html',
+            controller  : 'HomeCtrl'
+        })
 
         .when('/drivers', {
             templateUrl : 'app/components/home/con-web/jobs.html',

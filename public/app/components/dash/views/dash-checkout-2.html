@@ -175,7 +175,7 @@
                       <td class="number"> Small items x {{jobDeets.itemBoxes[0].qty}},
                           Medium items x {{jobDeets.itemBoxes[1].qty}}
                           Large items x {{jobDeets.itemBoxes[2].qty}}</td>
-                    </tr>
+                    </tr>      
                       <tr>
                           <td><strong>Extra Helper</strong></td>
                       <td class="number"><div ng-if="jobDeets.extraHelp == false" class="col-md-9 pull-right">
@@ -185,6 +185,18 @@
                                 Yes
                         </div></td>
                     </tr>
+                      <tr>
+                          <td width="30%"><strong>Important notes</strong></td>
+                           <td width="70%">
+                            <ul>
+                            <li>This price is for a ground floor to ground floor service. You will be charged an extra £5 per man per floor if you require loading from another floor. Any property that has an adequately functioning lift will not incur this charge.</li>
+                            <li>Terms copy:  “I confirm that all the consignment details are correct and I acknowledge that I have read and agree to the Terms and Conditions of this agreement”</li>   
+                               
+                            </ul>
+                            
+                          </td>
+                    </tr>
+                      
                   </tbody>
                 </table>
               </div>
@@ -210,8 +222,11 @@
                           <td><h4><strong style="font-family:'roboto' !important;">Deposit Due Now</strong></h4></td>
                       <td class="number"><h2><strong>£{{jobDeets.deposit}}.00</stong></h2></td>
                     </tr>
+                      
+                      
                   </tbody>
                 </table>
+                    <div class="pull-right">I confirm that all the consignment details are correct and I acknowledge that I have read and agree to the <a href="/con-terms" target="_blank">Terms</a> and Conditions of this agreement <input type="radio" name="gender" value="male" checked></div>
               </div>
                       </div>     
 
