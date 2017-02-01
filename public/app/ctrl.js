@@ -601,7 +601,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
 
 
-        $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
+        $scope.totalCost = Math.ceil((workCost + fuelCost/* + extra*/) * 10) / 10;
 
 
 
