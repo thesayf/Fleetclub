@@ -581,11 +581,11 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         }
         var workCost = totalTime * rate;
 
-        if($scope.dashInstant.extraHelp == true) {
+        /*if($scope.dashInstant.extraHelp == true) {
             var extra = 20 * (totalTime/60);
         } else {
             var extra = 0;
-        }
+        }*/
 
         /*if(van == 'Small Van' && (workCost+extra) < 15) {
             workCost = 15;
