@@ -211,20 +211,20 @@ app.factory('rates', function() {
     return {
         0: {
             minRange: 0,
-            maxRange: 300,
+            maxRange: 200,
             rate: .25,
             van: 'Small Van',
             details: 'Short Wheel Base - 350 ft3, Length: 3.4m, Width: 1.7m, Height: 1.7m, Payload: 1200-1500kg'
         },
         1: {
-            minRange: 301,
-            maxRange: 400,
+            minRange: 201,
+            maxRange: 350,
             rate: .34,
             van: 'Medium Van',
             details: 'Long Wheel Base - 600 ft3, Length: 4m, Width: 2m, Height: 2.2m, Payload: 1200-1500kg'
         },
         2: {
-            minRange: 401,
+            minRange: 351,
             maxRange: 600,
             rate: .59,
             van: 'Luton Van',
