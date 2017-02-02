@@ -546,7 +546,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         for(rat in rates) {
             var minRange = rates[rat].minRange;
             var maxRange = rates[rat].maxRange;
-            if($scope.totalCuft > minRange && $scope.totalCuft < maxRange) {
+            if($scope.totalCuft >= minRange && $scope.totalCuft <= maxRange) {
                 var rate = rates[rat].rate;
                 var van = rates[rat].van;
                 var jobMinCub = rates[rat].minRange;
