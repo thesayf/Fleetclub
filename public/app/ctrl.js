@@ -22,88 +22,6 @@ app.controller('DashHomeCtrl', function($scope) {
 })
 
 
-// Ctrl For Signup
-app.controller('DashSignupCtrl', function($scope, $http, $rootScope, validation, $location, $localStorage) {
-    $scope.user = {};
-    /*$scope.user.businesstype = 'Business Type';
-    $scope.bizType = {
-        availableOptions: [
-          {name: 'Business Type', dis: true},
-          {name: 'Removal Company'},
-          {name: 'Courier'},
-          {name: 'Clearance'},
-          {name: 'Logistics'}
-        ],
-    };*/
-
-    $scope.register = function(){
-
-        $location.path("/dash");
-
-//        var valiOptions = [
-//            {eleName: 'userFirstName', type: 'name', msg: 'Please enter a valid Firstname!'},
-//            {eleName: 'userLastName', type: 'name', msg: 'Please enter a valid Lastname!'},
-//            {eleName: 'userPhone', type: 'number', msg: 'Please enter a valid Mobile Number!'},
-//            {eleName: 'userEmail', type: 'email', msg: 'Please enter a valid email address!'},
-//            {eleName: 'userPassword', type: 'password', msg: 'Please enter a password!'}
-//        ]
-//        validation.checkVal(valiOptions, function(callback) {
-//            if(callback > 0) {
-//                return false
-//            } else {
-//                $http.post('/api/register', $scope.user)
-//                .success(function(user){
-//                    console.log(user);
-//                    $rootScope.currentUser = user;
-//                    if(user.success == false) {
-//                        toastr.error(user.message);
-//                    } else {
-//                        $localStorage['token'] = user.data;
-//                        $location.path('/dash');
-//                        toastr.success('Login successful');
-//                    }
-//                });
-//            }
-//        })
-    };
-})
-
-// Ctrl For Signup
-app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $route, $localStorage, validation, user) {
-    $scope.user = user;
-    $scope.login = function(user, $event){
-        var flag = 0;
-        $event.preventDefault();
-        user.dashTrack = 'dash';
-        if(user.username.length > 0 ) {
-            flag += 0;
-        } else {
-            toastr.error('Please input a username');
-            flag += 1;
-        }
-
-        if(user.password && user.password.length > 0 ) {
-            flag += 0;
-        } else {
-            toastr.error('Please input a password');
-            flag += 1;
-        }
-
-        if(flag < 1) {
-            $http.post('/api/login', user).then(function(response){
-                console.log(response);
-                if(response.data.success == true) {
-                    $localStorage['token'] = response.data.data;
-                    $location.url("/dash");
-                    $rootScope.currentUser = user;
-                    toastr.success(response.data.message);
-                } else {
-                    toastr.error(response.data.message);
-                }
-            });
-        }
-    };
-})
 
 // Ctrl For Dash
 app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift, $filter, autho) {
@@ -253,10 +171,19 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var month = realTime.getUTCMonth() + 1; //months from 1-12
         var day = realTime.getUTCDate();
         var year = realTime.getUTCFullYear().toString().substr(2,2);
+        console.log(month);
         if(month < 10) {
-            var nowDate = day+'-0'+month+'-'+year;
+            if(day < 10) {
+              var nowDate = '0'+day+'-0'+month+'-'+year;
+            } else {
+              var nowDate = day+'-0'+month+'-'+year;
+            }
         } else {
-            var nowDate = day+'-'+month+'-'+year;
+            if(day < 10) {
+              var nowDate = '0'+day+'-'+month+'-'+year;
+            } else {
+              var nowDate = '0'+day+'-'+month+'-'+year;
+            }
         }
 
 
@@ -266,9 +193,13 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
         if($scope.dashInstant.jobDate !== undefined) {
             $scope.jd = $scope.dashInstant.jobDate;
+            console.log('nowDate'+ nowDate);
+            console.log('njobDate'+ $scope.dashInstant.jobDate);
             if($scope.dashInstant.jobDate == nowDate) {
+              console.log('samed dat');
                 $scope.nowTime = h;
             } else {
+                console.log('no dat');
                 $scope.nowTime = 0;
             }
             console.log($scope.nowTime);
@@ -279,6 +210,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
             flag = flag + 1;
             canProgress = canProgress + 1;
+            console.log('itemBoxes');
+
         }
 
         $scope.totalQty = (
@@ -296,7 +229,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         if($scope.dashInstant.address == undefined) {
             flag = flag + 1;
             canProgress = canProgress + 1;
+            console.log('address undefined');
+
         } else {
+
             var add = $scope.dashInstant.address;
 
             if(add.start_location !== undefined) {
@@ -349,6 +285,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
         }
 
+
+
         // IF NO JOB DATE
         if($scope.dashInstant.jobDate == undefined || $scope.dashInstant.jobDate == '') {
             canProgress = canProgress + 1;
@@ -365,17 +303,26 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             var year = realTime.getUTCFullYear().toString().substr(2,2);
             var nowDate = day+'-'+month+'-'+year;
             var nowTime = h+':'+m;
-            if(nowTime > $scope.dashInstant.jobStartTime && !($scope.dashInstant.jobDate > nowDate) ) {
+            var nowTimeH = h;
+            var startTimeSplit = $scope.dashInstant.jobStartTime.split('-');
+            var startTimeSplitH = $scope.dashInstant.jobStartTime.split(':');
+            console.log('startTimeSplitH[0] '+startTimeSplitH[0]);
+            console.log('nowTime '+nowTime);
+            if(nowTimeH > startTimeSplitH[0] && $scope.dashInstant.jobDate == nowDate ) {
+              console.log('nowTime prob '+$scope.dashInstant.jobStartTime);
                 canProgress = canProgress + 1;
             }
         }
 
         if(flag > 0) {
-            //console.log('flagged');
+            console.log('flagged');
         } else {
             //console.log('ok no flag');
             $scope.calcAlgo();
         }
+
+        console.log('canProgress '+canProgress);
+        console.log('flag '+flag);
 
         if(canProgress > 0) {
             $('#review-booking-button').attr('data-target', '');
@@ -392,7 +339,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.changeInventory = function(type, num) {
-        var currNum = $scope.dashInstant.itemBoxes[num].qty;
+        e.preventDefault();
+        var currNum = parseInt($scope.dashInstant.itemBoxes[num].qty);
         if(type == 'plus') {
             $scope.dashInstant.itemBoxes[num].qty = parseInt(currNum + 1);
         } else {
@@ -402,6 +350,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         }
         if($scope.totalCuft >= 600) {
             $.growl.error({message: 'Please call us for moves with 600 cubic feet or over!'})
+        } else {
+          $('.growl').remove();
         }
     }
 
@@ -415,6 +365,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     $scope.holdDriverDelay = function(e) {
         if($('#review-booking-button').hasClass('disabled')) {
+
             // IF THERES NO INVENTORY FLAG
             if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
                 $.growl.error({ message: 'Fill in the Inventory!' });
@@ -580,23 +531,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             }
         }
         var workCost = totalTime * rate;
-
-        /*if($scope.dashInstant.extraHelp == true) {
-            var extra = 20 * (totalTime/60);
-        } else {
-            var extra = 0;
-        }*/
-
-        /*if(van == 'Small Van' && (workCost+extra) < 15) {
-            workCost = 15;
-        }
-        if(van == 'Medium Van' && (workCost+extra) < 20) {
-            workCost = 20;
-        }
-        if(van == 'Luton Van' && (workCost+extra) < 35) {
-            workCost = 35;
-        }*/
-
 
 
 
@@ -992,9 +926,14 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
     }
 
     $scope.next2 = function(){
+      if($('#terms-agree').is(":checked")) {
         autho.checkout3 = true;
         $localStorage.vg.jobDetails = $scope.jobDeets;
         $location.path("/checkout-3")
+      } else {
+        $.growl.error({ message: 'Please agree to the terms.' });
+      }
+
     }
 
     $scope.back2 = function(){
@@ -1062,6 +1001,13 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
                                 autho.checkout3 = false;
                                 autho.checkout2 = false;
                                 autho.checkout1 = false;
+                                $localStorage.vg = {};
+                                $scope.dashInstant = {};
+                                $scope.dashInstant.itemBoxes = [
+                                    {size: 'smItems', qty: 0},
+                                    {size: 'mdItems', qty: 0},
+                                    {size: 'lgItems', qty: 0}
+                                ]
                                 $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
                                     $localStorage.vg = {};
                                     $scope.dashInstant = {};
@@ -1075,6 +1021,8 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
                                 $.growl.error({message: 'Job Booking Failed Please Call Us!'});
                                 $form.find('.submit').prop('disabled', false);
                                 $('.spinner').remove();
+                                $localStorage.vg = {};
+                                $scope.dashInstant = {};
                             }
                         })
                     } else {
