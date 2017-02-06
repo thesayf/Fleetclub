@@ -293,7 +293,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         if($scope.totalCuft >= 600) {
             flag = flag + 1;
             canProgress = canProgress + 1;
-            $.growl.error({message: 'Please call us for moves with 600 cubic feet or over!'})
         } else {
           //$('.growl').remove();
         }
@@ -645,11 +644,12 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             $scope.totalCuft = $scope.totalCuft + (itemCuft * itemQty);
         }
 
-        if($scope.totalCuft > 500) {
-            $('#limit-note').removeClass('hide');
-
+        if($scope.totalCuft >= 600) {
+          $('.cubic-error').removeClass('hide');
+          //$.growl.error({message: 'Please call us for moves with 600 cubic feet or over!'})
         } else {
-            $('#limit-note').addClass('hide');
+          //$('.growl').remove();
+          $('.cubic-error').addClass('hide');
         }
     }, true)
 
