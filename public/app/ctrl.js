@@ -54,6 +54,11 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     // Start GMaps
     maps.init();
 
+    autho.checkout1 = false;
+    autho.checkout2 = false;
+    autho.checkout3 = false;
+    autho.bc = false;
+
     $scope.autocompleteOptions = {
         componentRestrictions: { country: 'uk' },
         types: ['geocode']
@@ -883,6 +888,9 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
     }
     if($location.path() == '/checkout-3') {
         if(autho.checkout3 !== true) {$location.path("/dash");}
+        if(autho.bc == true) {
+          $location.path("/dash");
+        }
     }
     if($location.path() == '/booking-complete') {
         if(autho.bc !== true) {$location.path("/dash");}
