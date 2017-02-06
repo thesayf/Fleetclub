@@ -1016,8 +1016,10 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
                                 autho.checkout3 = false;
                                 autho.checkout2 = false;
                                 autho.checkout1 = false;
-                                //$localStorage.vg = {};
-                                //$scope.dashInstant = {};
+                                $scope.clone = $scope.jobDeets;
+                                $localStorage.vg = {};
+                                $scope.dashInstant = {};
+                                $scope.jobDeets = {};
                                 /*$scope.dashInstant.itemBoxes = [
                                     {size: 'smItems', qty: 0},
                                     {size: 'mdItems', qty: 0},
