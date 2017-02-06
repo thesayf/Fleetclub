@@ -18,17 +18,17 @@
                   <div class="row">
                     <div class="col-sm-6 col-xs-12 tableBlcok">
                       <address>
-                        <span>Pick Up Address:</span> {{clone.address.start_location.number}} {{clone.address.start_location.name}} <br>
-                        <span>Delivery Address:</span> {{clone.address.end_location.number}} {{clone.address.end_location.name}} <br>
-                         <span>Date and Time:</span> {{clone.jobDate}}, {{clone.jobStartTime}}<br>
-                        <span>Phone:</span> {{clone.number}} <br>
-                        <span>Email:</span> {{clone.email}} <br>
-                          <span>Inventory:</span> Small items x {{clone.itemBoxes[0].qty}},
-                          Medium items x {{clone.itemBoxes[1].qty}},
-                          Large items x {{clone.itemBoxes[2].qty}} <br>
-                          <span>Price:</span> £{{clone.estiCalc}}.00 <br>
-                          <span>Deposit paid:</span> £{{clone.deposit}}.00 <br>
-                          <span>To Be Paid:</span> £{{clone.toPay}}.00 <br>
+                        <span>Pick Up Address:</span> {{jobDeets.address.start_location.number}} {{jobDeets.address.start_location.name}} <br>
+                        <span>Delivery Address:</span> {{jobDeets.address.end_location.number}} {{jobDeets.address.end_location.name}} <br>
+                         <span>Date and Time:</span> {{jobDeets.jobDate}}, {{jobDeets.jobStartTime}}<br>
+                        <span>Phone:</span> {{jobDeets.number}} <br>
+                        <span>Email:</span> {{jobDeets.email}} <br>
+                          <span>Inventory:</span> Small items x {{jobDeets.itemBoxes[0].qty}},
+                          Medium items x {{jobDeets.itemBoxes[1].qty}},
+                          Large items x {{jobDeets.itemBoxes[2].qty}} <br>
+                          <span>Price:</span> £{{jobDeets.estiCalc}}.00 <br>
+                          <span>Deposit paid:</span> £{{jobDeets.deposit}}.00 <br>
+                          <span>To Be Paid:</span> £{{jobDeets.toPay}}.00 <br>
                           <span>What happens next? - Important notes please read</span><br>
                           <div class="col-sm-12 col-xs-12 tableBlcok">
                           <ul>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-sm-6 col-xs-12">
                       <div id="orderIdBox" class="well">
-                        <h2><small>Order ID</small>{{clone.paymentID}}</h2>
+                        <h2><small>Order ID</small>{{jobDeets.paymentID}}</h2>
                       </div>
                     </div>
                   </div>
