@@ -1008,21 +1008,21 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
                                 autho.checkout3 = false;
                                 autho.checkout2 = false;
                                 autho.checkout1 = false;
-                                $localStorage.vg = {};
-                                $scope.dashInstant = {};
-                                $scope.dashInstant.itemBoxes = [
+                                //$localStorage.vg = {};
+                                //$scope.dashInstant = {};
+                                /*$scope.dashInstant.itemBoxes = [
                                     {size: 'smItems', qty: 0},
                                     {size: 'mdItems', qty: 0},
                                     {size: 'lgItems', qty: 0}
-                                ]
+                                ]*/
                                 $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
-                                    $localStorage.vg = {};
+                                    /*$localStorage.vg = {};
                                     $scope.dashInstant = {};
                                     $scope.dashInstant.itemBoxes = [
                                         {size: 'smItems', qty: 0},
                                         {size: 'mdItems', qty: 0},
                                         {size: 'lgItems', qty: 0}
-                                    ]
+                                    ]*/
                                 });
                             } else {
                                 $.growl.error({message: 'Job Booking Failed Please Call Us!'});
