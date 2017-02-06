@@ -339,7 +339,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.changeInventory = function(type, num) {
-        e.preventDefault();
         var currNum = parseInt($scope.dashInstant.itemBoxes[num].qty);
         if(type == 'plus') {
             $scope.dashInstant.itemBoxes[num].qty = parseInt(currNum + 1);
