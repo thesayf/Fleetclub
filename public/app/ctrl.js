@@ -285,6 +285,14 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
         }
 
+        if($scope.totalCuft >= 600) {
+            flag = flag + 1;
+            canProgress = canProgress + 1;
+            $.growl.error({message: 'Please call us for moves with 600 cubic feet or over!'})
+        } else {
+          //$('.growl').remove();
+        }
+
 
 
         // IF NO JOB DATE
@@ -347,11 +355,11 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 $scope.dashInstant.itemBoxes[num].qty = parseInt(currNum - 1);
             }
         }
-        if($scope.totalCuft >= 600) {
+        /*if($scope.totalCuft >= 600) {
             $.growl.error({message: 'Please call us for moves with 600 cubic feet or over!'})
         } else {
           $('.growl').remove();
-        }
+        }*/
     }
 
     $scope.clickSlot = function(e) {
