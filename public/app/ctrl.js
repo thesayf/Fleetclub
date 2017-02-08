@@ -267,10 +267,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         flag = flag + 1;
                         canProgress = canProgress + 1;
                     }
-                    if(add.start_location.lat == undefined) {
-                      flag = flag + 1;
-                      canProgress = canProgress + 1;
-                    }
+
                 } else {
                     flag = flag + 1;
                     canProgress = canProgress + 1;
@@ -284,6 +281,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                     flag = flag + 1;
                     canProgress = canProgress + 1;
                 }
+                if(add.start_location.lat == undefined) {
+                  flag = flag + 1;
+                  canProgress = canProgress + 1;
+                }
             } else {
                 flag = flag + 1;
                 canProgress = canProgress + 1;
@@ -295,10 +296,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         flag = flag + 1;
                         canProgress = canProgress + 1;
                     }
-                    if(add.end_location.lat == undefined) {
-                      flag = flag + 1;
-                      canProgress = canProgress + 1;
-                    }
+
                 } else {
                     flag = flag + 1;
                     canProgress = canProgress + 1;
@@ -311,6 +309,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 } else {
                     flag = flag + 1;
                     canProgress = canProgress + 1;
+                }
+                if(add.end_location.lat == undefined) {
+                  flag = flag + 1;
+                  canProgress = canProgress + 1;
                 }
             } else {
                 flag = flag + 1;
