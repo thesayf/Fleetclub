@@ -111,7 +111,10 @@ swift.bookJob = function(rest, data, cb) {
       }
   }
 
+  //console.log(swiftObj);
+
     rest.post(deliveryUrl, {data: swiftObj}).on('complete', function(data, response) {
+      //console.log(response);
         cb(response);
     });
 }

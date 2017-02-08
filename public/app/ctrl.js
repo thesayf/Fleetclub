@@ -6,12 +6,19 @@ app.controller('HomeCtrl', function($scope, $localStorage, $location) {
     $localStorage.vg = {};
     $homeContact = {};
 
+    function getBaseUrl(cb) {
+      var re = new RegExp(/^.*\//);
+      cb(re.exec(window.location.href));
+    }
+
     $scope.dashpage = function() {
-        $location.path("/dash")
+        getBaseUrl(function(url) {
+          window.location.href = (url+"dash");
+        });
     }
 
     $scope.homeContactSubmit = function() {
-        console.log('hi');
+        //console.log('hi');
     }
 
 })
@@ -68,7 +75,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var timeNow = new Date().getTime();
         var saveTime = $localStorage.vg.jobDetails.timestamp;
         var saveTimePlus5Hr = saveTime + (1000 * 60 * 60 * 5);
-        console.log(saveTime+' - '+saveTimePlus5Hr);
+        //console.log(saveTime+' - '+saveTimePlus5Hr);
 
         //var diff = saveTimePlus5Hr - saveTime;
         if(timeNow > saveTimePlus5Hr) {
@@ -176,7 +183,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var month = realTime.getUTCMonth() + 1; //months from 1-12
         var day = realTime.getUTCDate();
         var year = realTime.getUTCFullYear().toString().substr(2,2);
-        console.log(month);
+        //console.log(month);
         if(month < 10) {
             if(day < 10) {
               var nowDate = '0'+day+'-0'+month+'-'+year;
@@ -198,16 +205,16 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
         if($scope.dashInstant.jobDate !== undefined) {
             $scope.jd = $scope.dashInstant.jobDate;
-            console.log('nowDate'+ nowDate);
-            console.log('njobDate'+ $scope.dashInstant.jobDate);
+            //console.log('nowDate'+ nowDate);
+            //console.log('njobDate'+ $scope.dashInstant.jobDate);
             if($scope.dashInstant.jobDate == nowDate) {
-              console.log('samed dat');
+              //console.log('samed dat');
                 $scope.nowTime = h;
             } else {
-                console.log('no dat');
+                //console.log('no dat');
                 $scope.nowTime = 0;
             }
-            console.log($scope.nowTime);
+            //console.log($scope.nowTime);
         }
 
 
@@ -215,7 +222,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
             flag = flag + 1;
             canProgress = canProgress + 1;
-            console.log('itemBoxes');
+            //console.log('itemBoxes');
 
         }
 
@@ -224,7 +231,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             parseInt($scope.dashInstant.itemBoxes[1].qty) +
             parseInt($scope.dashInstant.itemBoxes[2].qty) );
 
-        console.log($scope.totalQty);
+        //console.log($scope.totalQty);
 
 
         /*$scope.totalQty = ($scope.dashInstant.itemBoxes[0].qty + scope.dashInstant.itemBoxes[1].qty) + $scope.dashInstant.itemBoxes[2].qty;*/
@@ -234,7 +241,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         if($scope.dashInstant.address == undefined) {
             flag = flag + 1;
             canProgress = canProgress + 1;
-            console.log('address undefined');
+            //console.log('address undefined');
 
         } else {
 
@@ -318,23 +325,23 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             var nowTimeH = h;
             var startTimeSplit = $scope.dashInstant.jobStartTime.split('-');
             var startTimeSplitH = $scope.dashInstant.jobStartTime.split(':');
-            console.log('startTimeSplitH[0] '+startTimeSplitH[0]);
-            console.log('nowTime '+nowTime);
+            //console.log('startTimeSplitH[0] '+startTimeSplitH[0]);
+            //console.log('nowTime '+nowTime);
             if(nowTimeH > startTimeSplitH[0] && $scope.dashInstant.jobDate == nowDate ) {
-              console.log('nowTime prob '+$scope.dashInstant.jobStartTime);
+              //console.log('nowTime prob '+$scope.dashInstant.jobStartTime);
                 canProgress = canProgress + 1;
             }
         }
 
         if(flag > 0) {
-            console.log('flagged');
+            //console.log('flagged');
         } else {
             //console.log('ok no flag');
             $scope.calcAlgo();
         }
 
-        console.log('canProgress '+canProgress);
-        console.log('flag '+flag);
+        //console.log('canProgress '+canProgress);
+        //console.log('flag '+flag);
 
         if(canProgress > 0) {
             $('#review-booking-button').attr('data-target', '');
@@ -370,12 +377,13 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var input = $(e.currentTarget).find('input');
         $(input)[0].checked = true;
         $scope.dashInstant.jobStartTime = $(input).val();
-        console.log($scope.dashInstant.jobStartTime);
+        //console.log($scope.dashInstant.jobStartTime);
         $scope.changeData();
     }
 
     $scope.holdDriverDelay = function(e) {
         if($('#review-booking-button').hasClass('disabled')) {
+            $scope.calcAlgo();
 
             // IF THERES NO INVENTORY FLAG
             if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
@@ -449,8 +457,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
 
                 if(nowTime > $scope.dashInstant.jobStartTime && day == splitChooseDate[0]) {
-                    console.log(day);
-                    console.log(splitChooseDate[0]);
+                    //console.log(day);
+                    //console.log(splitChooseDate[0]);
                     var d1 = Date.parse(utcNowDate);
                     var d2 = Date.parse(utcJobDate);
                     if (d1 < d2) {
@@ -605,6 +613,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
                         $scope.dashInstant.distance = tempMiles;
                         $scope.dashInstant.duration = data.duration;
+                        $scope.calcAlgo();
                     });
              }
         }
@@ -708,7 +717,7 @@ app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, in
                 toastr.error(response.message);
             }
         });
-        console.log("test to see if email")
+        //console.log("test to see if email")
     };
 
    $scope.logout = function(){
@@ -936,7 +945,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
     }
 
     $scope.back = function(){
-        console.log('bk');
+        //console.log('bk');
         $location.path("/checkout")
     }
 
