@@ -47,11 +47,14 @@ body { margin-top:20px; }
                         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
                         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
 
-                        <div class="container col-sm-12 col-md-offset-2 col-md-8">
+                        <div class="container col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-offset-2 col-md-8">
                             <div class="row">
 
                               <div class="panel panel-primary panel-borders">
-                                <div class="panel-heading panel-color"><span class="title">Card Details</span></div>
+                                <div class="panel-heading panel-color"><span class="title">Card Details</span>
+                                  
+                                  
+                                  </div>
                                   <div class="panel-body">
 
 
@@ -62,6 +65,7 @@ body { margin-top:20px; }
                                             <div class="row display-tr" >
                                                 <h3 class="panel-title display-td accepted" >Accepted Cards</h3>
                                                 <div class="display-td" >
+                                                    
                                                     <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
                                                 </div>
                                             </div>
@@ -89,7 +93,7 @@ body { margin-top:20px; }
                                                     <div class="col-xs-12 col-md-4">
                                                         <div class="form-group">
                                                             <label>
-                                                              <span>Expiration (MM)</span>
+                                                              <span>Exp (MM)</span>
                                                               <input maxlength="2" ng-model="ccDeets.expMonth" class="form-control" type="text" size="4" data-stripe="exp_month">
 
                                                             </label>
@@ -100,7 +104,7 @@ body { margin-top:20px; }
                                                      <div class="col-xs-12 col-md-4">
                                                          <div class="form-group">
                                                             <label>
-                                                              <span>Expiration (YY)</span>
+                                                              <span>Exp (YY)</span>
                                                               <input maxlength="2" ng-model="ccDeets.expYear" type="text" class="form-control" size="4" data-stripe="exp_year">
                                                             </label>
                                                         </div>
@@ -132,9 +136,22 @@ body { margin-top:20px; }
 
                                                   <div class="row">
                                                       <div class="col-xs-12">
-                                                          <input type="submit" class="submit subscribe btn btn-success btn-lg btn-block col-md-6" value="Pay Deposit | £{{jobDeets.deposit}}">
+                                                          <input type="submit" class="submit subscribe btn btn-success btn-lg btn-block col-md-6" value="Pay Deposit | £{{jobDeets.deposit}}" >
                                                       </div>
                                                   </div>
+                                                <div class="row">
+                                                <span class="pull-right pbs-margin" ><img src="assets/img/pbs.png"></img></span>
+                                                </div>
+<!--
+                                            <div class="row">
+                                                <span class="pull-right pbs-margin" ><img src="assets/img/secured-by-stripe.gif"></img></span>
+                                                </div>
+                                            
+                                            <div class="row">
+                                                <span class="pull-right pbs-margin" ><img src="assets/img/pbs3.png"></img></span>
+                                                </div>
+                                                
+-->
                                                 </form>
                                         </div>
                                     </div>

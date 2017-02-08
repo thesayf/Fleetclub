@@ -12,7 +12,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'HomeCtrl'
         })
     
-        .when('/con-terms', {
+        .when('/customer-terms', {
             templateUrl : 'app/components/home/con-web/con-terms.html',
             controller  : 'HomeCtrl'
         })
