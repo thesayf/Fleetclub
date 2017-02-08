@@ -267,6 +267,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         flag = flag + 1;
                         canProgress = canProgress + 1;
                     }
+                    if(add.start_location.lat == undefined) {
+                      flag = flag + 1;
+                      canProgress = canProgress + 1;
+                    }
                 } else {
                     flag = flag + 1;
                     canProgress = canProgress + 1;
@@ -290,6 +294,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                     if(add.end_location.name.length < 3) {
                         flag = flag + 1;
                         canProgress = canProgress + 1;
+                    }
+                    if(add.end_location.lat == undefined) {
+                      flag = flag + 1;
+                      canProgress = canProgress + 1;
                     }
                 } else {
                     flag = flag + 1;
@@ -405,6 +413,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             }
 
             // IF NO ADDRESS DATA
+
             if($scope.dashInstant.address == undefined) {
                 $.growl.error({message: 'Fill in the Start & End Location!'});
             } else {
@@ -414,9 +423,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         if(add.start_location.name.length < 3) {
                             $.growl.error({ message: 'Fill in the Start Location!' });
                         }
-                        if(add.start_location.lat == undefined) {
-                          $.growl.error({ message: 'Use the location suggestion drop down box to pick your start address' });
-                        }
+
                     } else {
                         $.growl.error({ message: 'Fill in the Start Location!' });
                     }
@@ -452,7 +459,15 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 } else {
                     $.growl.error({ message: 'Fill in the End Location!' });
                 }
+                console.log(add.start_location.lat);
+                if(add.start_location.lat == undefined) {
+                  $.growl.error({ message: 'Use the location suggestion drop down box to pick your start address' });
+                }
+                if(add.start_location.lng == undefined) {
+                  $.growl.error({ message: 'Use the location suggestion drop down box to pick your start address' });
+                }
             }
+
 
             // IF NO JOB DATE
             if($scope.dashInstant.jobDate == undefined || $scope.dashInstant.jobDate == '') {
