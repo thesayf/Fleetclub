@@ -56,7 +56,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     idleLogout();
 
     $('.item-in').bind('touchstart', function preventZoom(e) {
-      console.log('dt');
         var t2 = e.timeStamp
           , t1 = $(this).data('lastTouch') || t2
           , dt = t2 - t1

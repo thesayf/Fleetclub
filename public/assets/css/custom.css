@@ -9,6 +9,7 @@
    	color: #a94442;
 }
 .auto-marg {margin: 0 auto !important;}
+.item-in {font-size: 16px !important;}
 .plus-minus {
     cursor: pointer;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -214,14 +215,14 @@
   font-size: 15px;
   margin: 0 0 13px 0;
 }
-        
+
         .rev-border{
         padding-top: 0px !important;
-        
+
     }
-        
+
         .inv-no-border{
-        
+
         padding-top: 0px !important;
 
 
@@ -230,7 +231,7 @@
 }
 
 .pbs-margin{
-        
+
         padding-top: 20px;
     }
 
