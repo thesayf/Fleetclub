@@ -55,6 +55,21 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
     idleLogout();
 
+    $('.item-in').bind('touchstart', function preventZoom(e) {
+      console.log('dt');
+        var t2 = e.timeStamp
+          , t1 = $(this).data('lastTouch') || t2
+          , dt = t2 - t1
+          , fingers = e.originalEvent.touches.length;
+        $('.item-in').data('lastTouch', t2);
+        if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+
+        e.preventDefault(); // double tap - prevent the zoom
+        // also synthesize click events we just swallowed up
+        $('.item-in').trigger('click').trigger('click');
+      });
+
      /*Popover*/
         $('[data-toggle="popover"]').popover();
 
@@ -400,6 +415,9 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         if(add.start_location.name.length < 3) {
                             $.growl.error({ message: 'Fill in the Start Location!' });
                         }
+                        if(add.start_location.lat == undefined) {
+                          $.growl.error({ message: 'Use the location suggestion drop down box to pick your start address' });
+                        }
                     } else {
                         $.growl.error({ message: 'Fill in the Start Location!' });
                     }
@@ -418,6 +436,9 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                     if(add.end_location.name !== undefined) {
                         if(add.end_location.name.length < 3) {
                             $.growl.error({ message: 'Fill in the End Location!' });
+                        }
+                        if(add.end_location.lat == undefined) {
+                          $.growl.error({ message: 'Use the location suggestion drop down box to pick your delivery address' });
                         }
                     } else {
                         $.growl.error({ message: 'Fill in the End Location!' });
