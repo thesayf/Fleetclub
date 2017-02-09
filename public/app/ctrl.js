@@ -240,6 +240,15 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
 
         // IF THERES NO INVENTORY FLAG
+        if(isNan($scope.dashInstant.itemBoxes[0].qty) == true) {
+          $scope.dashInstant.itemBoxes[0].qty = 0;
+        }
+        if(isNan($scope.dashInstant.itemBoxes[1].qty) == true) {
+          $scope.dashInstant.itemBoxes[1].qty = 0;
+        }
+        if(isNan($scope.dashInstant.itemBoxes[2].qty) == true) {
+          $scope.dashInstant.itemBoxes[2].qty = 0;
+        }
         if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
             flag = flag + 1;
             canProgress = canProgress + 1;
