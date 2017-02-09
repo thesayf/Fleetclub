@@ -183,6 +183,13 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     })
 
+    $scope.removeGoo = function() {
+      $('.pac-container').css('display', 'none');
+    }
+    /*$scope.showGoo = function() {
+      $('.pac-container').css('display', 'block');
+    }*/
+
     //var timepicker = $('.datetimepicker-hours.table-condensed thead tr th');
     //console.log(timepicker.length);
 
