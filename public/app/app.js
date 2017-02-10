@@ -4,5 +4,7 @@ var app = angular.module('app',
         'ui.bootstrap',
         'google.places',
         'ngFileUpload',
-        'ngStorage'
+        'ngStorage',
+        'angulartics',
+        'angulartics.google.analytics'
     ]);
