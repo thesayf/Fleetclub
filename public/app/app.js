@@ -6,5 +6,6 @@ var app = angular.module('app',
         'ngFileUpload',
         'ngStorage',
         'angulartics',
-        'angulartics.google.analytics'
+        'angulartics.google.analytics',
+        'angulartics.google.tagmanager'
     ]);

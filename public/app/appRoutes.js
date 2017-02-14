@@ -73,6 +73,12 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
+        
+        .when('/job-form', {
+            templateUrl : 'app/components/dash/views/jobform.html',
+            controller  : 'CheckoutCtrl',
+            //action    : 'dash-allmessages'
+        })
 
         .otherwise({
             redirectTo: '/'
