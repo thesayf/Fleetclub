@@ -7,5 +7,4 @@ var app = angular.module('app',
         'ngStorage',
         'angulartics',
         'angulartics.google.analytics',
-        'angulartics.google.tagmanager'
     ]);
