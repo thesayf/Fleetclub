@@ -32,11 +32,11 @@
                     </tr>
                       <tr>
                           <td width="10%"><strong>Number</strong></td>
-                      <td width="90%"><input required=""  ng-model="jobDeets.number" placeholder="Number" class="form-control"></td>
+                      <td width="90%"><input id="inputnumber" required=""  ng-model="jobDeets.number" placeholder="Number" class="form-control"></td>
                     </tr>
                       <tr>
                           <td width="10%"><strong>Instructions For Driver</strong></td>
-                      <td width="90%"><textarea required=""  ng-model="jobDeets.instructions" class="form-control"></textarea></td>
+                      <td width="90%"><textarea id="notesinput" required=""  ng-model="jobDeets.instructions" class="form-control"></textarea></td>
                     </tr>
                   </tbody>
                 </table>
@@ -52,7 +52,7 @@
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
 
-              <a href=""><button ng-click="next()" class="btn btn-primary btn-space wizard-next pull-right">Next<i class="icon s7-angle-right"></i></button></a>
+              <a href=""><button id="checkout-1-next" ng-click="next()" class="btn btn-primary btn-space wizard-next pull-right">Next<i class="icon s7-angle-right"></i></button></a>
               <a href="/dash"><button class="btn btn-default btn-space wizard-next pull-right"><i class="icon s7-angle-left"></i>Back</button></a>
             </div>
           </div>

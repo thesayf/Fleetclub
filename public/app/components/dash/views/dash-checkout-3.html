@@ -80,7 +80,7 @@ body { margin-top:20px; }
                                                           <div class="form-group">
                                                             <label for="cardNumber">CARD NUMBER</label>
                                                               <div class="input-group">
-                                                              <input ng-model="ccDeets.number" type="text" size="20" class="form-control" data-stripe="number">
+                                                              <input id="card-number" ng-model="ccDeets.number" type="text" size="20" class="form-control" data-stripe="number">
                                                                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                                                   </div>
                                                         </div>
@@ -94,7 +94,7 @@ body { margin-top:20px; }
                                                         <div class="form-group">
                                                             <label>
                                                               <span>Exp (MM)</span>
-                                                              <input maxlength="2" ng-model="ccDeets.expMonth" class="form-control" type="text" size="4" data-stripe="exp_month">
+                                                              <input id="exp-mm" maxlength="2" ng-model="ccDeets.expMonth" class="form-control" type="text" size="4" data-stripe="exp_month">
 
                                                             </label>
 
@@ -105,7 +105,7 @@ body { margin-top:20px; }
                                                          <div class="form-group">
                                                             <label>
                                                               <span>Exp (YY)</span>
-                                                              <input maxlength="2" ng-model="ccDeets.expYear" type="text" class="form-control" size="4" data-stripe="exp_year">
+                                                              <input id="exp-yy" maxlength="2" ng-model="ccDeets.expYear" type="text" class="form-control" size="4" data-stripe="exp_year">
                                                             </label>
                                                         </div>
                                                       </div>
@@ -114,7 +114,7 @@ body { margin-top:20px; }
                                                          <div class="form-group">
                                                             <label>
                                                               <span>CVC (3 digits)</span>
-                                                              <input maxlength="3" ng-model="ccDeets.expCvc" class="form-control" type="text" size="4" data-stripe="cvc">
+                                                              <input id="cvc" maxlength="3" ng-model="ccDeets.expCvc" class="form-control" type="text" size="4" data-stripe="cvc">
                                                             </label>
                                                         </div>
                                                       </div>
@@ -127,7 +127,7 @@ body { margin-top:20px; }
                                                           <div class="form-group">
                                                             <label>
                                                               <span>Billing Postcode</span>
-                                                              <input class="form-control" ng-model="ccDeets.zip" type="text" size="6" data-stripe="address_zip">
+                                                              <input id="billing-postcode" class="form-control" ng-model="ccDeets.zip" type="text" size="6" data-stripe="address_zip">  
                                                             </label>
                                                          </div>
                                                         </div>
@@ -136,7 +136,7 @@ body { margin-top:20px; }
 
                                                   <div class="row">
                                                       <div class="col-xs-12">
-                                                          <input type="submit" class="submit subscribe btn btn-success btn-lg btn-block col-md-6" value="Pay Deposit | £{{jobDeets.deposit}}" >
+                                                          <input id="pay-deposit" type="submit" class="submit subscribe btn btn-success btn-lg btn-block col-md-6" value="Pay Deposit | £{{jobDeets.deposit}}" >
                                                       </div>
                                                   </div>
                                                 <div class="row">
