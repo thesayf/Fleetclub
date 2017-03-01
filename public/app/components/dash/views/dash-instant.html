@@ -27,7 +27,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button id="choose-delivery-date"  data-toggle="modal" data-target="#form-bp99" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Delivery Date <span ng-if="jd" class="badge badge-primary" >{{jd}}</span></button></td>
+                                            <button id="choose-delivery-date"    data-toggle="modal" data-target="#form-bp99" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Delivery Date <span ng-if="jd" class="badge badge-primary" >{{jd}}</span></button></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -51,7 +51,7 @@
 
                                       <div class="col-sm-5 xs-pt-5 pull-right">
                                         <div class="switch-button switch-button-success">
-                                          <input id="add-helper-choice" ng-click="extraHelpClick()" type="checkbox" model="dashInstant.extraHelp" name="swt5" id="swt5"><span>
+                                          <input ng-click="extraHelpClick()" type="checkbox" model="dashInstant.extraHelp" name="swt5" id="swt5"><span>
                                             <label for="swt5"></label></span>
                                         </div>
                                       </div>
@@ -192,7 +192,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
-                <button id="Time-slot-done      " type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+                <button id="Time-slot-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
             </div>
         </div>
     </div>
@@ -317,8 +317,8 @@
             <div class="modal-body form">
               <div class="panel-body">
                 <div class="input-group date datetimepicker col-md-12 col-xs-12">
-                      <input id="date-Input-box" placeholder="Delivery Date" id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
-                    <span id="choose-delivery-date" class="input-group-addon btn btn-primary" ng-click="openCalendar()">
+                      <input placeholder="Delivery Date" id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
+                    <span id="job-date-picker" class="input-group-addon btn btn-primary" ng-click="openCalendar()">
 
                         <i class="icon-th s7-date"></i>
                     </span>

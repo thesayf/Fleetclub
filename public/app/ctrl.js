@@ -965,7 +965,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
 
     $scope.ccDeets = {};
 
-    $scope.jobDeets = $localStorage.vg.jobDetails;
+        $scope.jobDeets = $localStorage.vg.jobDetails;
 
     $scope.vali = function(name, length, msg, cb) {
         if(name == '' || name == undefined || name.length < 3) {
