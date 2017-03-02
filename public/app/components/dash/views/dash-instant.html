@@ -107,6 +107,22 @@
                         <label>Building/Door Number</label>
                         <input id="delivery-doornumber-input" class="form-control" ng-change="changeData()" ng-model="dashInstant.address.end_location.number" placeholder="Door Number" />
                       </div>
+                      <div class="form-group">
+                    <label>Delivery Contact Name</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="Contact Name" />
+                    </div>
+                    <div class="form-group">
+                    <label>Delivery Contact Name</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="Contact Number" />
+                    </div>
+                    <div class="form-group">
+                    <label>Delivery Contact Email</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="Contact Email" />
+                    </div>
+                    <div class="form-group">
+                    <label>Delivery Instructions Instructions</label>
+                      <textarea id="notesinput" required=""  ng-model="jobDeets.instructions" class="form-control"></textarea>
+                    </div>
                     </form>
               </div>
             </div>
@@ -129,6 +145,8 @@
               <div class="modal-body form inv-no-border">
                  <div class="panel-body inv-no-border">
 
+
+                 <div class="col-md-6">
 
                 <table class="table table-striped table-fw-widget table-hover">
                   <thead>
@@ -187,6 +205,68 @@
                     <tr ng-if="!dashInstant.jobDate"><td>Please choose a job starting date.</td></tr>
                   </tbody>
                 </table>
+                         </div>
+                     
+                      <div class="col-md-6">
+
+                <table class="table table-striped table-fw-widget table-hover">
+                  <thead>
+                    <tr>
+
+                      <th width="70%" >Slot</th>
+                      <th>Choose</th>
+                    </tr>
+                  </thead>
+                  <tbody class="no-border-x">
+                      <tr id="time-slot-0900-1100" ng-click="clickSlot($event)" ng-if="nowTime < 9">
+                      <td><strong>09:00</strong> - 11:00</td>
+                      <td><input id="time-slot-0900-1100" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="09:00 - 11:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                      <tr id="time-slot-1000-1200" ng-click="clickSlot($event)" ng-if="nowTime < 10">
+                      <td><strong>10:00</strong> - 12:00</td>
+                      <td><input id="time-slot-1000-1200" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="10:00 - 12:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                    <tr id="time-slot-1100-1300" ng-click="clickSlot($event)" ng-if="nowTime < 11">
+                      <td><strong>11:00</strong> - 13:00</td>
+                      <td><input id="time-slot-1100-1300" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="11:00 - 13:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                      <tr id="time-slot-1200-1400" ng-click="clickSlot($event)" ng-if="nowTime < 12">
+                      <td><strong>12:00</strong> - 14:00</td>
+                      <td><input id="time-slot-1200-1400" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="12:00 - 14:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                      <tr id="time-slot-1300-1500" ng-click="clickSlot($event)" ng-if="nowTime < 13">
+                      <td><strong>13:00</strong> - 15:00</td>
+                      <td><input id="time-slot-1300-1500" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="13:00 - 15:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                      <tr id="time-slot-1400-1600" ng-click="clickSlot($event)" ng-if="nowTime < 14">
+                      <td><strong>14:00</strong> - 16:00</td>
+                      <td><input id="time-slot-1400-1600" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="14:00 - 16:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                      <tr id="time-slot-1500-1700" ng-click="clickSlot($event)" ng-if="nowTime < 15">
+                      <td><strong>15:00</strong> - 17:00</td>
+                      <td><input id="time-slot-1500-1700" ng-model="dashInstant.jobStartTime" type="radio" checked="" ng-change="changeData()" value="15:00 - 17:00" name="rad1" id="rad1"></td>
+                    </tr>
+                    <tr id="time-slot-1600-1800" ng-click="clickSlot($event)" ng-if="nowTime < 16">
+                      <td><strong>16:00</strong> - 18:00</td>
+                      <td><input id="time-slot-1600-1800" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="16:00 - 18:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                    <tr id="time-slot-1700-1900" ng-click="clickSlot($event)" ng-if="nowTime < 17">
+                      <td><strong>17:00</strong> - 19:00</td>
+                      <td><input id="time-slot-1700-1900" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="17:00 - 19:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                    <tr id="time-slot-1800-2000" ng-click="clickSlot($event)" ng-if="nowTime < 18">
+                      <td><strong>18:00</strong> - 20:00</td>
+                      <td><input id="time-slot-1800-2000" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="18:00 - 20:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                    <tr id="time-slot-1900-2100" ng-click="clickSlot($event)" ng-if="nowTime < 19">
+                      <td><strong>19:00</strong> - 21:00</td>
+                      <td><input id="time-slot-1900-2100" ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="19:00 - 21:00" type="radio" checked="" name="rad1" id="rad1"></td>
+                    </tr>
+                    <tr ng-if="nowTime > 18"><td>No more time slots available today please choose another date.</td></tr>
+                    <tr ng-if="!dashInstant.jobDate"><td>Please choose a job starting date.</td></tr>
+                  </tbody>
+                </table>
+                         </div>
 <div class="clearfix"></div>
             </div>
             </div>

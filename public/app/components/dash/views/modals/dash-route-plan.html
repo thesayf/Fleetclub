@@ -13,12 +13,28 @@
                     <label>Collection Postcode</label>
                     <input id="collection-postcode-input" class="form-control" force-selection="true" placeholder="Enter Postcode Here" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.start_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' />
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
                     <label>Building/Door Number</label>
                       <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="House Name Or Number" />
                     </div>
+                    <div class="form-group">
+                    <label>Pick-up Name </label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="Contact Name" />
+                    </div>
+                    <div class="form-group">
+                    <label>Pick-up Number</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="Contact Number" />
+                    </div>
+                    <div class="form-group">
+                    <label>Pick-up Email</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="Contact Email" />
+                    </div>
+                    <div class="form-group">
+                    <label>Pick-up Instructions</label>
+                      <textarea id="notesinput" required=""  ng-model="jobDeets.instructions" class="form-control"></textarea>
+                    </div>
                   </form>
-<div class="clearfix"></div>
+ 
                 </div>
             </div>
             <div class="modal-footer">
