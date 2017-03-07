@@ -21,8 +21,8 @@
                         <span>Pick Up Address:</span> {{jobDeets.address.start_location.number}} {{jobDeets.address.start_location.name}} <br>
                         <span>Delivery Address:</span> {{jobDeets.address.end_location.number}} {{jobDeets.address.end_location.name}} <br>
                          <span>Date and Time:</span> {{jobDeets.jobDate}}, {{jobDeets.jobStartTime}}<br>
-                        <span>Phone:</span> {{jobDeets.number}} <br>
-                        <span>Email:</span> {{jobDeets.email}} <br>
+                        <span>Phone:</span> Pickup:{{jobDeets.pickNumber}}, Delivery:{{jobDeets.delNumber}}<br>
+                        <span>Email:</span> Pickup:{{jobDeets.pickEmail}}, Delivery:{{jobDeets.delEmail}} <br>
                           <span>Inventory:</span> Small items x {{jobDeets.itemBoxes[0].qty}},
                           Medium items x {{jobDeets.itemBoxes[1].qty}},
                           Large items x {{jobDeets.itemBoxes[2].qty}} <br>

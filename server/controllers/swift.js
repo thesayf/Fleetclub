@@ -22,8 +22,16 @@ swift.bookJob = function(rest, data, cb) {
         data.extraHelp = '2 Man';
     }
 
-    if(data.instructions == undefined) {
-        data.instructions = '';
+    if(data.pickInstructions == undefined) {
+        data.pickInstructions = '';
+    } else {
+      data.pickInstructions = 'Pickup Instructions: '+pickInstructions;
+    }
+
+    if(data.delInstructions == undefined) {
+          data.delInstructions = '';
+    } else {
+      data.delInstructions = 'Pickup Instructions: '+pickInstructions;
     }
 
     var dateSplit = data.jobDate.split('-');
@@ -37,7 +45,7 @@ swift.bookJob = function(rest, data, cb) {
       "apiKey": swiftKey,
       "booking": {
         "reference": data.jobDate+',('+data.jobStartTime+'),£'+(parseInt(data.estiCalc) - parseInt(data.deposit))+','+data.extraHelp,
-        "deliveryInstructions": data.instructions+' - '+ 'Sm:'+data.itemBoxes[0].qty+', Md:'+data.itemBoxes[1].qty+', Lg:'+data.itemBoxes[2].qty+' cubic feet: '+data.jobMinCub+' - '+data.jobMaxCub+' cuFt',
+        "deliveryInstructions": data.pickInstructions+' '+data.delInstructions+' - '+ 'Sm:'+data.itemBoxes[0].qty+', Md:'+data.itemBoxes[1].qty+', Lg:'+data.itemBoxes[2].qty+' cubic feet: '+data.jobMinCub+' - '+data.jobMaxCub+' cuFt'+', Item Type:'+data.delType,
         "itemsRequirePurchase": false,
         "items": [
           {
@@ -55,9 +63,9 @@ swift.bookJob = function(rest, data, cb) {
         ],
         "pickupTime": '20'+year+'-'+month+'-'+day+'T'+data.jobStartTime.split('-')[0],
         "pickupDetail": {
-          "name": data.name,
-          "phone": data.number,
-          "email": data.email,
+          "name": data.pickName,
+          "phone": data.pickNumber,
+          "email": data.pickEmail,
           //"description": "sample string 4",
           //"addressComponents": "sample string 5",
           "address": data.address.start_location.number+', '+data.address.start_location.name,
@@ -75,9 +83,9 @@ swift.bookJob = function(rest, data, cb) {
           //"latestTime": "2016-11-30T15:51:34.9962121+00:00"
         //},
         "dropoffDetail": {
-          "name": data.name,
-          "phone": data.number,
-          "email": data.email,
+          "name": data.delName,
+          "phone": data.delNumber,
+          "email": data.delEmail,
           //"description": "sample string 4",
           //"addressComponents": "sample string 5",
           "address": data.address.end_location.number+', '+data.address.end_location.name,
