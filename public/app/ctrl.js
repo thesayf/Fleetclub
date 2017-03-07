@@ -55,7 +55,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
     idleLogout();
 
-    $('.item-in').bind('touchstart', function preventZoom(e) {
+    jQuery('.item-in').bind('touchstart', function preventZoom(e) {
         var t2 = e.timeStamp
           , t1 = $(this).data('lastTouch') || t2
           , dt = t2 - t1
@@ -245,9 +245,15 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             }
         }
 
+        $scope.dashInstant.jobStartTime = $scope.dashInstant.jobStartTimeHour+':'+$scope.dashInstant.jobStartTimeMin;
+
+
 
         if($scope.dashInstant.jobStartTime !== undefined || $scope.dashInstant.jobStartTime !== '') {
-            $scope.st = $scope.dashInstant.jobStartTime;
+            $scope.st = false;
+        } else {
+          $scope.st = true;
+          $scope.st1 = $scope.dashInstant.jobStartTime;
         }
 
         if($scope.dashInstant.jobDate !== undefined) {
