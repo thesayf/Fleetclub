@@ -7,34 +7,41 @@
             </div>
             <div class="modal-body form">
                 <div class="panel-body">
+                
+                    <button type="button" class="btn btn-success pull-right">Add Another Drop Off</button>
+                    <br>
+                    <div class="clearfix"></div>
+                    <hr>
+                    
+                <table class="table table-striped table-fw-widget">
+                <tbody>
 
-                <form role="form">
-                    <div class="form-group">
-                    <label>Collection Postcode</label>
-                    <input id="collection-postcode-input" class="form-control" force-selection="true" placeholder="Enter Postcode Here" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.start_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' />
-                    </div>
-                    <div class="form-group">
-                    <label>Building/Door Number</label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="House Name Or Number" />
-                    </div>
-                    <div class="form-group">
-                    <label>Pick-up Name </label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.pickName" ng-change="changeData()" placeholder="Contact Name" />
-                    </div>
-                    <div class="form-group">
-                    <label>Pick-up Number</label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.pickNumber" ng-change="changeData()" placeholder="Contact Number" />
-                    </div>
-                    <div class="form-group">
-                    <label>Pick-up Email</label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.pickEmail" ng-change="changeData()" placeholder="Contact Email" />
-                    </div>
-                    <div class="form-group">
-                    <label>Pick-up Instructions</label>
-                      <textarea id="notesinput" required=""  ng-model="jobDeets.pickInstructions" class="form-control"></textarea>
-                    </div>
-                  </form>
-
+                  <tr>
+                          <td width="20%"><strong>Collection Address</strong>
+                                     
+                          </td>
+                      <td width="80%">
+                        <div class="col-xs-12 col-sm-12 input-group">
+                             
+                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#form-bp2">Add Details</button>
+                           
+                      </div></td>
+                    </tr>
+                      <tr>
+                          <td width="10%"><strong>Delivery Address</strong>
+                            
+                          </td>
+                      <td width="90%"><div class="col-xs-12 col-sm-12 input-group auto-marg">
+                                <button type="button" class="btn btn-space btn-primary  pull-right"><i class="s7-close-circle"></i></button>
+                          <button type="button" class=" btn-space btn btn-primary pull-right" data-toggle="modal" data-target="#form-bp2">Add Details</button>  
+                          
+                      </div></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+                    
+                    <button type="button" class="btn btn-primary pull-right col-md-12   ">Optimise Route</button>
                 </div>
             </div>
             <div class="modal-footer">

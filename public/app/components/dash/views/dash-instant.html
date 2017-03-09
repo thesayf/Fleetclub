@@ -12,17 +12,12 @@
                                     <tr>
 
                                         <td>
-                                            <button id="add-inventory-button" data-toggle="modal" data-target="#inv-fullWidth" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add items for collection <span ng-if="totalQty > 0" class="badge badge-primary" >{{totalQty}} Items</span></button>
+                                            <button id="add-inventory-button" data-toggle="modal" data-target="#inv-fullWidth" type="button" class=" col-xs-12 btn btn-space    btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add items for collection <span ng-if="totalQty > 0" class="badge badge-primary" >{{totalQty}} Items</span></button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                             <button id="add-collection-address" data-toggle="modal" data-target="#form-bp1" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Collection Address <span ng-if="dashInstant.address.start_location.name && dashInstant.address.start_location.number" class="badge badge-primary" >{{dashInstant.address.start_location.name | limitTo: 7 }}...</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                             <button id="add-delivery-address" data-toggle="modal" data-target="#form-bp2" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker"></i> Add Delivery Address <span ng-if="dashInstant.address.end_location.name && dashInstant.address.end_location.number" class="badge badge-primary" >{{dashInstant.address.end_location.name | limitTo: 7 }}...</span> </button>
+                                             <button id="add-collection-address" data-toggle="modal" data-target="#form-bp1" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Addresses<span ng-if="dashInstant.address.start_location.name && dashInstant.address.start_location.number" class="badge badge-primary" >{{dashInstant.address.start_location.name | limitTo: 7 }}...</span></button>
                                         </td>
                                     </tr>
                                     <tr>
