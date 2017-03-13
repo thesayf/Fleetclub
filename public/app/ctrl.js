@@ -80,8 +80,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     autho.checkout3 = false;
     autho.bc = false;
 
-
-
     $scope.autocompleteOptions = {
         componentRestrictions: { country: 'uk' },
         types: ['geocode']
@@ -125,6 +123,33 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     }*/
 
+    $scope.dashInstant.extraDrop = 0;
+    //$scope.dashInstant.extraDropArr = [0];
+    $scope.dashInstant.extraDropObj = {0:{}};
+    $scope.dashInstant.delChange = 0;
+
+    $scope.addDrop = function() {
+      $scope.dashInstant.extraDrop++;
+      var objLen = Object.keys($scope.dashInstant.extraDropObj).length;
+      $scope.dashInstant.extraDropObj[objLen] = {};
+      //$scope.dashInstant.extraDropArr.push($scope.dashInstant.extraDrop);
+      console.log($scope.dashInstant.extraDropObj);
+    }
+
+    $scope.changeDelNum = function(no) {
+      $scope.dashInstant.delChange = no;
+      console.log('delChange: '+$scope.dashInstant.delChange);
+    }
+
+    $scope.deleteDropRow = function(no) {
+      //delete $scope.dashInstant.extraDropObj[no];
+      //$scope.dashInstant.extraDrop--;
+      //delete $scope.dashInstant.extraDropArr[no];
+      //$scope.$apply();
+      //$scope.dashInstant.extraDrop--;
+      //console.log($scope.dashInstant.extraDropObj);
+    }
+
     var realTime = new Date();
     $('#job-date-picker').datetimepicker({
         format: 'dd-mm-yy',
@@ -167,23 +192,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
       disableTimeRanges: [['07:00', '07:'+m9]]
     });
 
-
-    // Hide Picker When selected
-    /*$('#job-date-picker').datetimepicker().on('changeDate', function(ev){
-        $scope.dashInstant.startTime = $scope.dashInstant.jobDate;
-        var tempDate = $scope.dashInstant.startTime.split('-');
-        $scope.dashInstant.startTime = tempDate[1]+'-'+tempDate[0]+'-'+tempDate[2];
-        $scope.dashInstant.startTime = new Date($scope.dashInstant.startTime);
-        console.log($scope.dashInstant.startTime);
-        $('#early-time-picker').datetimepicker('remove');
-        $('#early-time-picker').datetimepicker({
-            startDate: $scope.dashInstant.startTime,
-            initialDate: $scope.dashInstant.startTime,
-            startView: 'day',
-            format: 'hh:ii',
-            maxView: 'day'
-        });
-    });*/
 
     $scope.closeTimePicker = function() {
         $('.datetimepicker-dropdown-bottom-right').hide();
@@ -246,8 +254,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         }
 
         $scope.dashInstant.jobStartTime = $scope.dashInstant.jobStartTimeHour+':'+$scope.dashInstant.jobStartTimeMin;
-
-
 
         if($scope.dashInstant.jobStartTime !== undefined || $scope.dashInstant.jobStartTime !== '') {
             $scope.st = false;
@@ -687,7 +693,19 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.updateMaps = function() {
-        if($scope.dashInstant && $scope.dashInstant.address) {
+      if($scope.dashInstant && $scope.dashInstant.address ) {
+        maps.setDirections($scope.dashInstant, function(data) {
+            var tempMiles = 0.000621371192237 * data.distance;
+            $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
+            $scope.dashInstant.distance = tempMiles;
+            $scope.dashInstant.duration = data.duration;
+            $scope.calcAlgo();
+        });
+      }
+
+
+
+        /*if($scope.dashInstant && $scope.dashInstant.address) {
             if($scope.dashInstant.address.start_location !== undefined) {
                 if($scope.dashInstant.address.start_location.name.formatted_address) {
                     $scope.dashInstant.address.start_location.lat =
@@ -717,7 +735,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 $scope.dashInstant.address.start_location.name !== '' &&
                 $scope.dashInstant.address.end_location !== undefined &&
                 $scope.dashInstant.address.end_location.name !== '') {
-                    maps.setDirections($scope.dashInstant.address, function(data) {
+                    maps.setDirections($scope.dashInstant, function(data) {
                         var tempMiles = 0.000621371192237 * data.distance;
                         $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
                         $scope.dashInstant.distance = tempMiles;
@@ -725,7 +743,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                         $scope.calcAlgo();
                     });
              }
-        }
+        }*/
     }
 
     $scope.extraHelpClick = function() {

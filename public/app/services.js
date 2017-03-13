@@ -466,8 +466,8 @@ app.service('maps', function($timeout, $window, routeInfo) {
     }
 
     // Render Directions
-    maps.setDirections = function(address, callback) {
-        console.log(address);
+    maps.setDirections = function(dashInstant, callback) {
+        //console.log(address);
         //var tempWay = [];
         /*if(address.pickup1.name !== '') {
             tempWay.push({location: address.pickup1.name+', UK', stopover:false});
@@ -491,16 +491,25 @@ app.service('maps', function($timeout, $window, routeInfo) {
             var destination = tempWay[waypointCount-1]['location'];
         }*/
 
-        var dashInstant = {};
+        var waypts = [];
+        for (var i = 0; i < Object.keys(dashInstant.extraDropObj).length; i++) {
+            waypts.push({
+              location: dashInstant.extraDropObj[i].postcode.formatted_address,
+              stopover: true
+            });
+        }
+
+        console.log('address '+dashInstant.address.start_location);
+
 
         request = {
-            origin: address.start_location.name+', UK',
-            destination: address.end_location.name+', UK',
-            //waypoints: tempWay,
+            origin: dashInstant.address.start_location.name.formatted_address+', UK',
+            destination: dashInstant.address.start_location.name.formatted_address+', UK',
+            waypoints: waypts,
             travelMode: 'DRIVING',
             provideRouteAlternatives: false,
             unitSystem: google.maps.UnitSystem.METRIC,
-            optimizeWaypoints: false
+            optimizeWaypoints: true
         };
 
         directionsService.route(request, function (response, status) {

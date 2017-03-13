@@ -40,7 +40,6 @@
                                     </tr>
                                 <tr>
                                    <td class="item"><strong>Add Helper</strong>
-<!--                                        <a href="javascript:;" data-toggle="popover" data-content=" A Choose yes if you need a 2 man service" data-placement="top"><span class="badge badge-primary">i</span></a>-->
                                        <p>would you like your driver to bring a 2nd man to help with the lifting</p>
                                         <div class="form-group">
 
@@ -85,49 +84,6 @@
 
 
 
-<div id="form-bp2" tabindex="-1" role="dialog" class="modal fade colored-header">
-    <div class="modal-dialog custom-width">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-center">Add Delivery Address</h3>
-            </div>
-            <div class="modal-body form">
-                <div class="panel-body">
-                  <form role="form">
-                       <div class="form-group">
-                         <label>Delivery Postcode</label>
-                        <input id="delivery-postcode-input" class="form-control" force-selection="true" placeholder="Postcode" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.end_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' />
-                      </div>
-                      <div class="form-group">
-                        <label>Building/Door Number</label>
-                        <input id="delivery-doornumber-input" class="form-control" ng-change="changeData()" ng-model="dashInstant.address.end_location.number" placeholder="Door Number" />
-                      </div>
-                      <div class="form-group">
-                    <label>Delivery Contact Name</label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.delName" ng-change="changeData()" placeholder="Contact Name" />
-                    </div>
-                    <div class="form-group">
-                    <label>Delivery Contact Number</label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.delNumber" ng-change="changeData()" placeholder="Contact Number" />
-                    </div>
-                    <div class="form-group">
-                    <label>Delivery Contact Email</label>
-                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.delEmail" ng-change="changeData()" placeholder="Contact Email" />
-                    </div>
-                    <div class="form-group">
-                    <label>Delivery Instructions Instructions</label>
-                      <textarea id="notesinput" required=""  ng-model="jobDeets.delInstructions" class="form-control"></textarea>
-                    </div>
-                    </form>
-              </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
-                <button id="delivery-address-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div id="form-bp3" tabindex="-1" role="dialog" class="modal fade colored-header">
@@ -171,113 +127,6 @@
         </div>
     </div>
 </div>
-
-
-
-<!--
-
-<div class="am-content">
-    <aside class="page-aside">
-        <div class="am-scroller nano">
-            <div class="nano-content">
-                <div class="content">
-                    <div class="user-profile col-md-12 col-sm-12 no-pad-l">
-                        <div class=" info-block panel panel-default">
-                            <table class="no-border no-strip skills">
-                                <tbody class="no-border-x no-border-y">
-                                    <tr>
-                                        <td class="item">Items<span class="icon s7-car"></span></td>
-                                        <td><button data-toggle="modal" data-target="#inv-fullWidth" type="button" class="btn btn-space btn-warning col-md-12 col-xs-12">Declare Items</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="item">Route:<span class="icon s7-map-marker"></span></td>
-                                        <td> <button data-toggle="modal" data-target="#form-bp1" type="button" class="btn btn-space btn-warning col-md-12 col-xs-12">Choose Route</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="item">Date & Time:<span class="icon s7-date"></span></td>
-                                        <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
-                                            <input id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
-                                            <!-- <span class="input-group-addon btn btn-primary">
-                                            <i class="icon-th s7-date"></i>
-                                        </span>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td class="item">Extra Helper:<span class="icon s7-add-user"></span></td>
-                                    <td><div class="form-group">
-
-                                      <div class="col-sm-6 xs-pt-5">
-                                        <div class="switch-button switch-button-success">
-                                          <input ng-click="extraHelpClick()" type="checkbox" model="dashInstant.extraHelp" name="swt5" id="swt5"><span>
-                                            <label for="swt5"></label></span>
-                                        </div>
-                                      </div>
-
-
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="item">Price Estimate:<span ng-click="tester()" class="icon s7-credit"></span></td>
-                                    <td class="text-center">
-                                        <div ng-if="dashInstant.estiCalc > 0" class="">
-                                            <strong><font size="6">£{{dashInstant.estiCalc}}</font></strong>
-                                        </div>
-                                        <div ng-if="!dashInstant.estiCalc > 0" class="">
-                                            <strong><font size="6">_____</font></strong>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <button data-toggle="modal" data-target="#md-review" id="review-booking-button" ng-click="holdDriverDelay()" class="btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Find Drivers</button>
-            </div>
-        </div>
-    </div>
-</aside>
-<div class="main-content">
-    <!--+general-chart("classes", "title", "height", "id", "counter value", "counter desc", tools enabled (use true or false))
-    <div class="col-md-12">
-        <div id="map-canvas" style="width:100%; height:590px;"></div>
-    </div>
-</div>
-</div>
-
-<!-- Get fixed quote Modal Ends Here
-
-<div dash-van-type></div>
-<div dash-route-plan></div>
-
-
-<div id="mod-err" tabindex="-1" role="dialog" class="modal fade">
-    <div class="modal-dialog">
-        <div class="md-content">
-            <div class="modal-header">
-                <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i class="icon s7-close"></i></button>
-                <h3 class="modal-title">Driver Note</h3>
-            </div>
-            <div class="modal-body form">
-                <div class="form-group">
-                    <label>Job Name</label>
-                    <input ng-model="dashInstant.jobName" type="name" placeholder="Job name" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Your Note for Driver</label>
-                    <textarea ng-model="dashInstant.driverNote" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
-                <button type="button" data-dismiss="modal" class="btn btn-primary md-close">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div review-booking></div> -->
-
 
 
 
