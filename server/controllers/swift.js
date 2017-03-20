@@ -38,6 +38,25 @@ swift.bookJob = function(rest, data, cb) {
     var year = dateSplit[2];
     var month = dateSplit[1];
     var day = dateSplit[0];
+    var delItems = [];
+    var dropArrKeyMax = data.extraDropObj.length-1;
+
+    for(key in data.extraDropObj) {
+      console.log(data.extraDropObj[key]);
+      /*delItems[key].quantity = 1;
+      delItems[key].description = 'Door Number: '+data.extraDropObj[key].doorNumber+', '+
+      'Postcode: '+data.extraDropObj[key].postcode+', '+
+      'Name: '+data.extraDropObj[key].name+', '+
+      'Number: '+data.extraDropObj[key].number+', '+
+      'Email: '+data.extraDropObj[key].email+', '+
+      'Instructions: '+data.extraDropObj[key].instructions;*/
+    }
+
+    delItems.push({"quantity": data.itemBoxes[0].qty, "description": 'Small Items'});
+    delItems.push({"quantity": data.itemBoxes[1].qty, "description": 'Medium Items'});
+    delItems.push({"quantity": data.itemBoxes[2].qty, "description": 'Large Items'});
+
+
 
     // ref: day, date, timeslot, price-deposit, porter
 
@@ -47,20 +66,7 @@ swift.bookJob = function(rest, data, cb) {
         "reference": data.jobDate+',('+data.jobStartTime+'),£'+(parseInt(data.estiCalc) - parseInt(data.deposit))+','+data.extraHelp,
         "deliveryInstructions": data.pickInstructions+' '+data.delInstructions+' - '+ 'Sm:'+data.itemBoxes[0].qty+', Md:'+data.itemBoxes[1].qty+', Lg:'+data.itemBoxes[2].qty+' cubic feet: '+data.jobMinCub+' - '+data.jobMaxCub+' cuFt'+', Item Type:'+data.delType,
         "itemsRequirePurchase": false,
-        "items": [
-          {
-            "quantity": data.itemBoxes[0].qty,
-            "description": 'Small Items'
-          },
-          {
-            "quantity": data.itemBoxes[1].qty,
-            "description": 'Medium Items'
-          },
-          {
-            "quantity": data.itemBoxes[2].qty,
-            "description": 'Large Items'
-          }
-        ],
+        "items": delItems,
         "pickupTime": '20'+year+'-'+month+'-'+day+'T'+data.jobStartTime.split('-')[0],
         "pickupDetail": {
           "name": data.pickName,
@@ -88,14 +94,14 @@ swift.bookJob = function(rest, data, cb) {
           "email": data.delEmail,
           //"description": "sample string 4",
           //"addressComponents": "sample string 5",
-          "address": data.address.end_location.number+', '+data.address.end_location.name,
+          "address": data.extraDropObj[dropArrKeyMax].doorNumber+', '+data.extraDropObj[dropArrKeyMax].postcode.formatted_address,
           "additionalAddressDetails": {
             //"stateProvince": "sample string 1",
             //"country": "sample string 2",
             //"suburbLocality": "sample string 3",
             //"postcode": "sample string 4",
-            "latitude": data.address.end_location.lat,
-            "longitude": data.address.end_location.lng
+            "latitude": data.extraDropObj[dropArrKeyMax].lat,
+            "longitude": data.extraDropObj[dropArrKeyMax].lng
           }
         },
         "customerFee": data.estiCalc - data.deposit,
@@ -119,7 +125,7 @@ swift.bookJob = function(rest, data, cb) {
       }
   }
 
-  //console.log(swiftObj);
+  console.log(swiftObj);
 
     rest.post(deliveryUrl, {data: swiftObj}).on('complete', function(data, response) {
       //console.log(response);

@@ -17,7 +17,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                             <button id="add-collection-address" data-toggle="modal" data-target="#form-bp1" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Addresses<span ng-if="dashInstant.address.start_location.name && dashInstant.address.start_location.number" class="badge badge-primary" >{{dashInstant.address.start_location.name | limitTo: 7 }}...</span></button>
+                                             <button id="add-collection-address" data-toggle="modal" data-target="#form-bp1" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Addresses<span ng-if="dashInstant.address.start_location.name && dashInstant.address.start_location.number" class="badge badge-primary" >{{dashInstant.address.start_location.name.formatted_address | limitTo: 7 }}...</span></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -26,7 +26,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button id="choose-pickup-slot" data-toggle="modal" data-target="#form-bp3" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Pickup Slot <span ng-if="dashInstant.jobStartTimeHour && dashInstant.jobStartTimeMin" class="badge badge-primary" >{{dashInstant.jobStartTimeHour}}:{{dashInstant.jobStartTimeMin}}</span></button>
+                                            <button id="choose-pickup-slot" data-toggle="modal" data-target="#form-bp31" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Pickup Slot <span ng-if="dashInstant.jobStartTimeHour && dashInstant.jobStartTimeMin" class="badge badge-primary" >{{dashInstant.jobStartTimeHour}}:{{dashInstant.jobStartTimeMin}}</span></button>
 
 <!--
                                             <div class="input-group date datetimepicker col-md-12 col-xs-12">
@@ -86,7 +86,7 @@
 
 
 
-<div id="form-bp3" tabindex="-1" role="dialog" class="modal fade colored-header">
+<div id="form-bp31" tabindex="-1" role="dialog" class="modal fade colored-header">
     <div class="modal-dialog custom-width">
         <div class="modal-content">
             <div class="modal-header">

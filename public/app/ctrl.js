@@ -114,40 +114,47 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             {size: 'mdItems', qty: 0},
             {size: 'lgItems', qty: 0}
         ]
+        $scope.dashInstant.extraDropObj = [];
+        $scope.dashInstant.extraDropArr = [0];
+        $scope.dashInstant.extraDropCount = 0;
+        $scope.dashInstant.delChange = 0;
     }
 
+    //$scope.dashInstant.extraDrop = 0;
 
-    /*if($localStorage.vg.drivers) {
-
-    } else {
-
-    }*/
-
-    $scope.dashInstant.extraDrop = 0;
-    //$scope.dashInstant.extraDropArr = [0];
-    $scope.dashInstant.extraDropObj = {0:{}};
-    $scope.dashInstant.delChange = 0;
 
     $scope.addDrop = function() {
-      $scope.dashInstant.extraDrop++;
-      var objLen = Object.keys($scope.dashInstant.extraDropObj).length;
-      $scope.dashInstant.extraDropObj[objLen] = {};
-      //$scope.dashInstant.extraDropArr.push($scope.dashInstant.extraDrop);
-      console.log($scope.dashInstant.extraDropObj);
+        $scope.dashInstant.extraDropCount++;
+        $scope.dashInstant.extraDropArr.push($scope.dashInstant.extraDropCount);
+        if($scope.dashInstant.extraDropCount > 0) {
+          $scope.optimize = true;
+        } else {
+          $scope.optimize = false;
+        }
     }
 
     $scope.changeDelNum = function(no) {
-      $scope.dashInstant.delChange = no;
-      console.log('delChange: '+$scope.dashInstant.delChange);
+        $scope.dashInstant.delChange = no;
     }
 
     $scope.deleteDropRow = function(no) {
-      //delete $scope.dashInstant.extraDropObj[no];
-      //$scope.dashInstant.extraDrop--;
-      //delete $scope.dashInstant.extraDropArr[no];
-      //$scope.$apply();
-      //$scope.dashInstant.extraDrop--;
-      //console.log($scope.dashInstant.extraDropObj);
+      if($scope.dashInstant.extraDropCount !== 0) {
+        $scope.dashInstant.extraDropCount--;
+        $scope.dashInstant.extraDropArr.splice(no, 1);
+        if($scope.dashInstant.extraDropCount > 0) {
+          $scope.optimize = true;
+        } else {
+          $scope.optimize = false;
+        }
+      }
+    }
+
+    $scope.optRoute = false
+
+    $scope.optRouteFunc = function() {
+      $scope.optRoute = true;
+      $scope.updateMaps();
+      toastr.info('This is the most optimised route.');
     }
 
     var realTime = new Date();
@@ -338,6 +345,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         } else {
 
             var add = $scope.dashInstant.address;
+            var dropObj = $scope.dashInstant.extraDropObj;
 
             if(add.start_location !== undefined) {
                 if(add.start_location.name !== undefined) {
@@ -359,7 +367,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                     flag = flag + 1;
                     canProgress = canProgress + 1;
                 }
-                if(add.start_location.lat == undefined) {
+                if(add.start_location.name.formatted_address == undefined) {
                   flag = flag + 1;
                   canProgress = canProgress + 1;
                 }
@@ -368,7 +376,25 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 canProgress = canProgress + 1;
             }
 
-            if(add.end_location !== undefined) {
+            if(dropObj !== undefined) {
+                if(Object.keys(dropObj).length > 0) {
+                  for(i in dropObj) {
+                    if(dropObj[i].postcode.formatted_address.length < 1) {
+                      flag = flag + 1;
+                      canProgress = canProgress + 1;
+                    }
+                    if(dropObj[i].doorNumber.length < 1) {
+                      flag = flag + 1;
+                      canProgress = canProgress + 1;
+                    }
+                  }
+                }
+            } else {
+              flag = flag + 1;
+              canProgress = canProgress + 1;
+            }
+
+            /*if(add.end_location !== undefined) {
                 if(add.end_location.name !== undefined) {
                     if(add.end_location.name.length < 3) {
                         flag = flag + 1;
@@ -395,9 +421,33 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             } else {
                 flag = flag + 1;
                 canProgress = canProgress + 1;
-            }
+            }*/
 
         }
+
+
+        // update lat lng delivery POINTS
+        //.geometry.location.lat();
+        if(Object.keys($scope.dashInstant.extraDropObj).length > 0) {
+          var dropArrLenKey = Object.keys($scope.dashInstant.extraDropObj).length-1;
+          var latFuncErr = false;
+          try {
+              $scope.dashInstant.extraDropObj[dropArrLenKey].postcode.geometry.location.lat()
+          }
+          catch(err) {
+              latFuncErr = true;
+          }
+          finally {
+            if(latFuncErr == false) {
+              if ($scope.dashInstant.extraDropObj[dropArrLenKey].postcode.geometry.location.lat()) {
+                $scope.dashInstant.extraDropObj[dropArrLenKey].lat = $scope.dashInstant.extraDropObj[dropArrLenKey].postcode.geometry.location.lat();
+
+                $scope.dashInstant.extraDropObj[dropArrLenKey].lng = $scope.dashInstant.extraDropObj[dropArrLenKey].postcode.geometry.location.lng();
+              }
+            }
+          }
+        }
+
 
         if($scope.totalCuft >= 600) {
             flag = flag + 1;
@@ -492,12 +542,13 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 $.growl.error({ message: 'Fill in the Inventory!' });
             }
 
-            // IF NO ADDRESS DATA
 
+            // IF NO ADDRESS DATA
             if($scope.dashInstant.address == undefined) {
                 $.growl.error({message: 'Fill in the Start & End Location!'});
             } else {
                 var add = $scope.dashInstant.address;
+                var dropObj = $scope.dashInstant.extraDropObj;
                 if(add.start_location !== undefined) {
                     if(add.start_location.name !== undefined) {
                         if(add.start_location.name.length < 3) {
@@ -518,33 +569,28 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                     $.growl.error({ message: 'Fill in the Start Location!' });
                 }
 
-                if(add.end_location !== undefined) {
-                    if(add.end_location.name !== undefined) {
-                        if(add.end_location.name.length < 3) {
-                            $.growl.error({ message: 'Fill in the End Location!' });
+                // LOOP DROP POINTS
+                if(dropObj !== undefined) {
+                    if(Object.keys(dropObj).length > 0) {
+                      for(i in dropObj) {
+                        if(dropObj[i].postcode.formatted_address.length < 1) {
+                          $.growl.error({ message: 'Fill in all your drop off postcodes' });
                         }
-                        if(add.end_location.lat == undefined) {
-                          $.growl.error({ message: 'Use the location suggestion drop down box to pick your delivery address' });
+                        if(dropObj[i].doorNumber.length < 1) {
+                          $.growl.error({ message: 'Fill in all your drop off door numbers' });
                         }
-                    } else {
-                        $.growl.error({ message: 'Fill in the End Location!' });
-                    }
-                    if(add.end_location.number !== undefined) {
-                        if(add.end_location.number.length < 1) {
-                            $.growl.error({ message: 'Fill in the End Location House Number!' });
-                        }
-                    } else {
-                        $.growl.error({ message: 'Fill in the End Location House Number!' });
+                      }
                     }
                 } else {
-                    $.growl.error({ message: 'Fill in the End Location!' });
+                    $.growl.error({ message: 'Fill in the Drop Off Locations!' });
                 }
-                console.log(add.start_location.lat);
-                if(add.start_location.lat == undefined) {
-                  $.growl.error({ message: 'Use the location suggestion drop down box to pick your start address' });
+
+                if(add.start_location.name.formatted_address == undefined) {
+                  console.log(add);
+                  $.growl.error({ message: 'Use the location suggestion drop down box to pick your address' });
                 }
-                if(add.start_location.lng == undefined) {
-                  $.growl.error({ message: 'Use the location suggestion drop down box to pick your start address' });
+                if(add.start_location.name.formatted_address == undefined) {
+                  $.growl.error({ message: 'Use the location suggestion drop down box to pick your address' });
                 }
             }
 
@@ -694,9 +740,10 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     $scope.updateMaps = function() {
       if($scope.dashInstant && $scope.dashInstant.address ) {
-        maps.setDirections($scope.dashInstant, function(data) {
+        maps.setDirections($scope.dashInstant, $scope.optRoute, function(data) {
             var tempMiles = 0.000621371192237 * data.distance;
             $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
+            console.log('tempMiles: '+tempMiles);
             $scope.dashInstant.distance = tempMiles;
             $scope.dashInstant.duration = data.duration;
             $scope.calcAlgo();
@@ -989,6 +1036,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
                         $scope.jobDeets.paymentID = status.data.data.id;
                         $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
                         $http.post('/api/book-job', {data: $localStorage.vg.jobDetails}).then(function(resp) {
+                            console.log(resp);
                             if(resp.data.status == true) {
                                 autho.bc = true;
                                 $location.path("/booking-complete");

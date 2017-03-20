@@ -25,11 +25,12 @@
                     </tr>
                     <tr>
                         <td><strong style="font-family:'roboto' !important;">Pickup</strong></td>
-                      <td class="number"> {{dashInstant.address.start_location.number}} {{dashInstant.address.start_location.name}}  </td>
+                      <td class="number"> {{dashInstant.address.start_location.number}}, {{dashInstant.address.start_location.name.formatted_address}}  </td>
                     </tr>
                     <tr>
                         <td><strong style="font-family:'roboto' !important;">Delivery</strong></td>
-                      <td class="number">{{dashInstant.address.end_location.number}} {{dashInstant.address.end_location.name}}</td>
+                      <td  class="number">
+                        <p ng-repeat="ext in dashInstant.extraDropObj">{{ext.doorNumber}}, {{ext.postcode.formatted_address}}</p>
                     </tr>
                     <tr>
                         <td><strong style="font-family:'roboto' !important;">Date & Time</strong></td>

@@ -450,7 +450,7 @@ app.service('maps', function($timeout, $window, routeInfo) {
         $timeout(function(){
             directionsService = new google.maps.DirectionsService(),
             directionsDisplay = new google.maps.DirectionsRenderer({
-                draggable: true
+                draggable: false
             })
             var latlng = new google.maps.LatLng(51.3030, 0.0732);
             var myOptions = {
@@ -466,30 +466,12 @@ app.service('maps', function($timeout, $window, routeInfo) {
     }
 
     // Render Directions
-    maps.setDirections = function(dashInstant, callback) {
-        //console.log(address);
-        //var tempWay = [];
-        /*if(address.pickup1.name !== '') {
-            tempWay.push({location: address.pickup1.name+', UK', stopover:false});
-        }
-        if(address.dropoff1.name !== '') {
-            tempWay.push({location: address.dropoff1.name+', UK', stopover:false});
-        }
-        if(address.pickup2.name !== '') {
-            tempWay.push({location: address.pickup2.name+', UK', stopover:false});
-        }
-        if(address.dropoff2.name !== '') {
-            tempWay.push({location: address.dropoff2.name+', UK', stopover:false});
-        }
-        var waypointCount = Object.keys(tempWay).length || 0;*/
+    maps.setDirections = function(dashInstant, opt, callback) {
 
+        if(Object.keys(dashInstant.extraDropObj).length < 1) {
+          return false;
+        }
 
-        /*if(waypointCount == 0) {
-            var destination = address.dropoff1.name;
-        } else {
-            tempWay.push({location: address.dropoff1.name+', UK', stopover:false});
-            var destination = tempWay[waypointCount-1]['location'];
-        }*/
 
         var waypts = [];
         for (var i = 0; i < Object.keys(dashInstant.extraDropObj).length; i++) {
@@ -499,28 +481,51 @@ app.service('maps', function($timeout, $window, routeInfo) {
             });
         }
 
-        console.log('address '+dashInstant.address.start_location);
+        //console.log('address '+dashInstant.address.start_location);
+        console.log('address '+dashInstant.extraDropObj[Object.keys(dashInstant.extraDropObj).length-1].postcode.formatted_address);
 
 
         request = {
             origin: dashInstant.address.start_location.name.formatted_address+', UK',
-            destination: dashInstant.address.start_location.name.formatted_address+', UK',
+            destination: dashInstant.extraDropObj[Object.keys(dashInstant.extraDropObj).length-1].postcode.formatted_address+', UK',
+            //waypoints: waypts,
+            travelMode: 'DRIVING',
+            provideRouteAlternatives: false,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            optimizeWaypoints: opt
+        };
+
+        directionsService.route(request, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                //directionsDisplay.setDirections(response);
+                dashInstant.distance = response.routes[0].legs[0].distance.value;
+                dashInstant.duration = response.routes[0].legs[0].duration.value;
+            }
+            //google.maps.event.trigger(map, 'resize');
+            //callback(dashInstant);
+        });
+
+        request = {
+            origin: dashInstant.address.start_location.name.formatted_address+', UK',
+            destination: dashInstant.extraDropObj[Object.keys(dashInstant.extraDropObj).length-1].postcode.formatted_address+', UK',
             waypoints: waypts,
             travelMode: 'DRIVING',
             provideRouteAlternatives: false,
             unitSystem: google.maps.UnitSystem.METRIC,
-            optimizeWaypoints: true
+            optimizeWaypoints: opt
         };
 
         directionsService.route(request, function (response, status) {
             if (status === google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
-                dashInstant.distance = response.routes[0].legs[0].distance.value;
-                dashInstant.duration = response.routes[0].legs[0].duration.value;
+                //dashInstant.distance = response.routes[0].legs[0].distance.value;
+                //dashInstant.duration = response.routes[0].legs[0].duration.value;
             }
             google.maps.event.trigger(map, 'resize');
             callback(dashInstant);
         });
+
+
     }
     return maps;
 })
